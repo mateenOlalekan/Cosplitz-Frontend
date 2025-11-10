@@ -1,0 +1,72 @@
+/* -----------------------------------------------------------
+   🌐 Import Google Font — Raleway
+   ----------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* -----------------------------------------------------------
+   🧩 Global Reset
+   ----------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* -----------------------------------------------------------
+   ✨ Base Body Styles
+   ----------------------------------------------------------- */
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f9f9f9; /* Light, neutral background */
+  color: #222; /* Default text color */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* -----------------------------------------------------------
+   🎯 Accessibility & Focus States
+   ----------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------
+   🚫 Hide Scrollbar but Keep Scrolling
+   ----------------------------------------------------------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* -----------------------------------------------------------
+   💅 Smooth Element Transitions
+   ----------------------------------------------------------- */
+* {
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+/* -----------------------------------------------------------
+   ✨ Fade-In Page Transition Animation
+   ----------------------------------------------------------- */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
