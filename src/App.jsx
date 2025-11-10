@@ -12,7 +12,7 @@ const Forget = lazy(() => import("./pages/ForgetPassword"));
 const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
 const ConfirmPassword = lazy(() => import("./pages/ConfirmPassword"));
 const PasswordResetSuccess = lazy(() => import("./pages/PasswordResetSuccess"));
-const OnboardingSteps = lazy(() => import("./pages/OnboardingSteps"));
+const OnboardingSteps = lazy(() => import("./pages/OnBoardingSteps"));
 
 // Dashboard layout and pages (lazy-loaded)
 const DashboardLayout = lazy(() => import("./components/Layout/DashboardLayout"));

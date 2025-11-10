@@ -1,28 +1,6 @@
 import { useState } from "react";
 import { ChevronLeft, CheckCircle } from "lucide-react";
-import {
-  UtensilsCrossed,
-  Users,
-  DollarSign,
-  Zap,
-  Clock,
-  TrendingUp,
-  BookOpen,
-  Globe,
-  Briefcase,
-  MapPin,
-  Lock,
-  Eye,
-  Check,
-  Plane,
-  Wrench,
-  Lightbulb,
-  FileInput,
-  Package,
-  Headphones,
-  Hotel,
-  Truck,
-} from "lucide-react";
+import {  UtensilsCrossed,  Users,  DollarSign,  Zap,  Clock,  TrendingUp,  BookOpen,  Globe,  Briefcase,  MapPin,  Lock,  Eye,  Check,  Plane,  Wrench,  Lightbulb,  FileInput,  Package,  Headphones,  Hotel,  Truck,} from "lucide-react";
 
 const steps = [
   {
