@@ -12,7 +12,7 @@ import VerifyEmail from "./pages/VerifyEmail";
 import ConfirmPassword from "./pages/ConfirmPassword";
 import PasswordResetSuccess from "./pages/PasswordResetSuccess";
 import OnboardingSteps from "./pages/OnboardingSteps";
-import NotFound from "./pages/NotFound"; // ✅ Fixed: Corrected case-sensitive file name
+// ✅ Fixed: Corrected case-sensitive file name
 
 // Dashboard layout and pages
 import DashboardLayout from "../src/components/Layout/DashboardLayout"; // ✅ Fixed path: should be under /layouts, not /pages/Dashboard
@@ -52,8 +52,7 @@ export default function App() {
         <Route path="settings" element={<Settings />} />
       </Route>
 
-      {/* 🚫 Catch-All (404) */}
-      <Route path="*" element={<NotFound />} />
+
     </Routes>
   );
 }
