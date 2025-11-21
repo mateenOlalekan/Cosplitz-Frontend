@@ -9,7 +9,7 @@ export function LoadingScreen({ show }) {
     <div
       className={`
         fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999]
-        transition-opacity duration-[4500ms]
+        transition-opacity duration-1000
         ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
       `}>
       <div className="w-full flex justify-center items-center bg-green-650">
