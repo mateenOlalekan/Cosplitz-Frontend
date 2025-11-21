@@ -75,7 +75,7 @@ export default function WaveBackground() {
                   alt="App illustration"
                   className="w-full h-auto object-contain drop-shadow-2xl"
                   draggable="false"
-                  loading="lazy"
+                  
                 />
               </div>
             </div>
