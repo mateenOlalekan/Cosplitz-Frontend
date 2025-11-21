@@ -239,12 +239,7 @@ function EmailVerificationStep({ onVerify, onBack, error }) {
         <p className="text-red-600 text-sm mt-2 text-center">{error}</p>
       )}
 
-      {/* Instructions */}
-      <div className="mt-4 p-3 bg-blue-50 rounded-lg max-w-sm">
-        <p className="text-blue-700 text-sm text-center">
-          Enter the 6-digit code. You will automatically proceed when the code is correct.
-        </p>
-      </div>
+ 
     </div>
   );
 }

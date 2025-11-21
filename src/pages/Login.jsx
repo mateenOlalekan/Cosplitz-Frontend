@@ -6,6 +6,8 @@ import { Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { PiAppleLogoBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+
 import loginlogo from "../assets/loginmain.jpg";
 import logo from "../assets/logo.svg";
 
@@ -21,6 +23,8 @@ const schema = z.object({
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -30,13 +34,21 @@ export default function Login() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  // === LOGIN SUBMIT HANDLER ===
+  const onSubmit = async (data) => {
     console.log("Form Submitted:", data);
+
+    // Simulate backend login (remove for real API)
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // After successful login → ROUTE TO DASHBOARD
+    navigate("/dashboard");
+
     reset();
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-white ">
+    <div className="flex flex-col lg:flex-row h-screen bg-white">
       
       {/* === LEFT PANEL === */}
       <motion.div
@@ -205,7 +217,7 @@ export default function Login() {
               isSubmitting ? "opacity-60 cursor-not-allowed" : "hover:bg-green-700"
             }`}
           >
-            {isSubmitting ? "Creating Account..." : "Create Account"}
+            {isSubmitting ? "Processing..." : "Continue"}
           </motion.button>
 
           {/* Footer */}

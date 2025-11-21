@@ -1,15 +1,7 @@
 // src/components/Layout/Sidebar.jsx
 import { NavLink } from "react-router-dom";
-import {
-  Home,
-  Share2,
-  MessageSquare,
-  Wallet,
-  MapPin,
-  BarChart3,
-  X,
-} from "lucide-react";
-import SidebarLogo from "../../assets/logo.svg";
+import {  Home,  Share2,  MessageSquare,  Wallet,  MapPin,  BarChart3,  X,} from "lucide-react";
+import logo from "../../assets/logo.svg";
 
 const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   const handleOverlayClick = () => {
@@ -58,7 +50,7 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   <img
     src={logo}
     alt="Logo"
-    className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+    className="w-10 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
   />
 </div>
 
@@ -93,7 +85,7 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
           </nav>
 
           {/* Community Bonding Card */}
-          <div className="mt-6 p-4 bg-gradient-to-br from-[#0BA84C] via-[#0CC258] to-[#34BC6C] rounded-xl text-white">
+          <div className="mt-6 p-4 bg-[#1F8225] rounded-xl text-white">
             <div className="flex items-center gap-1 mb-2">
               {[...Array(5)].map((_, i) => (
                 <div key={i} className="w-1 h-1 bg-white rounded-full" />
