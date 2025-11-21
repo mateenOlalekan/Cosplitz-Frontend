@@ -344,7 +344,7 @@ export default function Login() {
       <div className="flex flex-1 flex-col items-center justify-start bg-white p-4 sm:p-6 overflow-y-auto">
         {/* Logo */}
         <div className="flex justify-start items-start w-full mb-4 pl-3 sm:pl-8">
-          <img src={logo} alt="Logo" className="w-28 sm:w-32" />
+          <img src={logo} alt="Logo" className="w-10 sm:w-16" />
         </div>
 
         {/* === MAIN FORM === */}
