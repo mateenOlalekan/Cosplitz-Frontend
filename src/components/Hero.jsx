@@ -29,7 +29,7 @@ export default function WaveBackground() {
         id="home"
         className="relative w-full min-h-screen pt-24 md:pt-24  bg-white overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto max-md:px-4 h-full">
+        <div className="max-w-7xl mx-auto px-4 max-md:px-4 h-full">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-16 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
 
             {/* ====== Left Content ====== */}
@@ -82,7 +82,7 @@ export default function WaveBackground() {
 
               {/* ====== Buttons ====== */}
               <div
-                className="hidden max-md:flex  sm:flex-row gap-4 pt-5 md:pt-6 w-full sm:w-auto"
+                className="hidden max-md:flex  sm:flex-row gap-4 pt-10 md:pt-6 w-full sm:w-auto"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >

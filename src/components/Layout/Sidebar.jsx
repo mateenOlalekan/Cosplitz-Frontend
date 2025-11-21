@@ -54,9 +54,14 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
           )}
 
           {/* Logo */}
-          <div className="flex items-center gap-2 mb-8">
-            <img src={SidebarLogo}/>
-          </div>
+<div className="w-full mb-8 flex justify-start">
+  <img
+    src={logo}
+    alt="Logo"
+    className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+  />
+</div>
+
 
           {/* Navigation Links */}
           <nav className="space-y-1 flex-1">

@@ -204,8 +204,6 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Loading Screen */}
-      <LoadingScreen show={loading} />
     </>
   );
 }

@@ -48,7 +48,7 @@ export default function Login() {
         <img
           src={loginlogo}
           alt="Illustration"
-          className="w-10 h-10 object-cover"
+          className="w-full object-cover"
         />
 
         <motion.div
@@ -77,11 +77,11 @@ export default function Login() {
         
         {/* Logo */}
         <div className="w-full mb-8 flex justify-start">
-          <img src={logo} alt="Logo" className="w-24 sm:w-28" />
+          <img src={logo} alt="Logo" className="w-16" />
         </div>
 
         {/* Header */}
-        <div className="w-full text-center mb-6">
+        <div className="w-full text-center mb-4">
           <h1 className="text-3xl font-bold text-gray-900">
             Create Your Account
           </h1>
@@ -91,7 +91,7 @@ export default function Login() {
         </div>
 
         {/* === SOCIAL BUTTONS === */}
-        <div className="grid grid-cols-1 gap-3 mb-6 w-full">
+        <div className="grid grid-cols-1 gap-2 mb-2 w-full">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -116,7 +116,7 @@ export default function Login() {
         </div>
 
         {/* Divider */}
-        <div className="relative w-full mb-6">
+        <div className="relative w-full mb-4">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
@@ -126,7 +126,7 @@ export default function Login() {
         </div>
 
         {/* === FORM === */}
-        <form className="w-full space-y-5" onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
           
           {/* Email */}
           <div>

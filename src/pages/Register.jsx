@@ -343,9 +343,14 @@ export default function Login() {
       {/* === RIGHT SIDE === */}
       <div className="flex flex-1 flex-col items-center justify-start bg-white p-4 sm:p-6 overflow-y-auto">
         {/* Logo */}
-        <div className="flex justify-start items-start w-full mb-4 pl-3 sm:pl-8">
-          <img src={logo} alt="Logo" className="w-10 sm:w-16" />
-        </div>
+<div className="w-full mb-8 flex justify-start">
+  <img
+    src={logo}
+    alt="Logo"
+    className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+  />
+</div>
+
 
         {/* === MAIN FORM === */}
         <div className="w-full max-w-2xl flex flex-col justify-center rounded-xl shadow-md border border-gray-100 p-3 sm:p-6 bg-white">
