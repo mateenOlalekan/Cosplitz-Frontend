@@ -49,7 +49,7 @@ const CreateSplitzPage = () => {
 
   return (
     <div className="min-h-screen">
-      <main className="p-4 bg-white max-w-5xl mx-auto">
+      <main className="p-4 bg-white max-w-4xl mx-auto rounded-xl">
 
 
         {/* Form Sections */}
@@ -63,7 +63,7 @@ const CreateSplitzPage = () => {
     Back
   </button>
 
-  <h1 className="text-3xl font-bold text-gray-900">Create Splittz</h1>
+  <h1 className="text-3xl font-bold text-gray-900 my-2">Create Splittz</h1>
 
   <p className="opacity-0">placeholder</p>
 </div>

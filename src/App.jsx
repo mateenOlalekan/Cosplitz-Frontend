@@ -62,8 +62,8 @@ export default function App() {
             <Route index element={<Overview />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="create-split" element={<CreateSplitzPage />} />
-            <Route path="wallet" element={<Wallet />} />
-            <Route path="payment" element={<Payment />} />
+            <Route path="payment" element={<Wallet />} />
+            <Route path="wallet" element={<Payment />} />
             <Route path="notification" element={<Notification />} />
             
             {/* Nested Settings Routes */}

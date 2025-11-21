@@ -5,7 +5,7 @@ export default function Wallet() {
   return (
     <div className="min-h-screen ">
       <div className="max-w-4xl mx-auto space-y-6">
-        <div className="bg-white rounded-xl flex flex-col gap-2 p-3">
+        <div className="bg-white rounded-xl flex flex-col space-y-4 p-3">
         <div className="bg-gradient-to-r from-[#014205] via-[#01F8225] via-[#1B7920] to-[#014205] rounded-2xl p-6 text-white shadow-lg">
           <p className="text-green-100 text-sm font-medium text-center">Available Balance</p>
           <div className="text-3xl font-bold text-center my-2">$500.30</div>
