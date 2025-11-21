@@ -48,23 +48,29 @@ const CreateSplitzPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <main className="p-4 max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium mb-4">
-            <ChevronLeft size={20} />
-            Back
-          </button>
-          <h1 className="text-3xl font-bold text-gray-900">Create Splittz</h1>
-        </div>
+    <div className="min-h-screen">
+      <main className="p-4 bg-white max-w-5xl mx-auto">
+
 
         {/* Form Sections */}
-        <div className="space-y-6">
+        <div className="space-y-3">
 
           {/* What are you splitting */}
           <section className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">What are you splitting?</h2>
+<div className="w-full flex justify-between items-center">
+  <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium">
+    <ChevronLeft size={20} />
+    Back
+  </button>
+
+  <h1 className="text-3xl font-bold text-gray-900">Create Splittz</h1>
+
+  <p className="opacity-0">placeholder</p>
+</div>
+
+
+
+            <h2 className="text-lg text-center font-semibold text-gray-900 mb-2">What are you splitting?</h2>
 
             <div className="space-y-4">
               <div>

@@ -17,7 +17,7 @@ const OnboardingSteps = lazy(() => import("./pages/OnBoardingSteps"));
 const DashboardLayout = lazy(() => import("./components/Layout/DashboardLayout"));
 const Overview = lazy(() => import("./pages/Dashboard/DashHome"));
 const Analytics = lazy(() => import("./pages/Dashboard/Analytics"));
-const SettingsLayout = lazy(() => import("./pages/Dashboard/Settings/SettingsLayout")); // New Settings Layout
+const SettingsLayout = lazy(() => import("./pages/Dashboard/Settings/SettingsLayout")); 
 const MyProfile = lazy(() => import("./pages/Dashboard/Settings/MyProfile"));
 const Notifications = lazy(() => import("./pages/Dashboard/Settings/Notifications"));
 const Verification = lazy(() => import("./pages/Dashboard/Settings/Verification"));
@@ -30,7 +30,7 @@ const Wallet = lazy(() => import("./pages/Dashboard/Wallet"));
 export default function App() {
   return (
     <>
-      {/* Add inline animations globally (no tailwind.config required) */}
+
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; }

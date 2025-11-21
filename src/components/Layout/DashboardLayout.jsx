@@ -16,7 +16,7 @@ export default function DashboardLayout() {
   }, []);
 
   return (
-    <div className="flex min-h-screen h-screen w-full bg-gray-50 overflow-hidden">
+    <div className="flex min-h-screen h-screen w-full  overflow-hidden">
       {/* Sidebar */}
       <Sidebar
         sidebarOpen={sidebarOpen}
@@ -34,7 +34,7 @@ export default function DashboardLayout() {
         />
 
         {/* Outlet renders nested dashboard pages */}
-        <main className="flex-1 overflow-y-auto p-6 bg-white">
+        <main className="flex-1 overflow-y-auto px-3 py-2 bg-slate-100">
           <Outlet />
         </main>
       </div>
