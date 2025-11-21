@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import NavbarLogo from "../../assets/logoframe.svg";
+import NavbarLogo from "../../assets/logo.svg";
 import { Menu, X } from "lucide-react";
 
 
