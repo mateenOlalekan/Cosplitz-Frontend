@@ -81,7 +81,7 @@ function EmailOTPModal({ onVerify, onClose, error, setError }) {
           <img
             src={logo}
             alt="Cosplitz Logo"
-            className="w-32 sm:w-40 h-auto object-contain"
+            className="w-20  h-auto object-contain"
           />
         </div>
 
