@@ -1,26 +1,22 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import NavbarLogo from "../../assets/logo.svg";
 import { Menu, X } from "lucide-react";
-
 
 export function LoadingScreen({ show }) {
   return (
     <div
-      className={`
-        fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999]
+      className={`fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999]
         transition-opacity duration-1000
-        ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
-      `}>
+        ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+    >
       <div className="w-full flex justify-center items-center bg-green-650">
-      <img
-        src={NavbarLogo}
-        
-        className="w-20 h-20 md:w-40 md:h-40 object-cover  drop-shadow-xl"
-        draggable="false"
-      />
+        <img
+          src={NavbarLogo}
+          className="w-20 h-20 md:w-40 md:h-40 object-cover drop-shadow-xl"
+          draggable="false"
+        />
       </div>
-      {/* Animated Image */}
     </div>
   );
 }
@@ -30,7 +26,8 @@ export default function Navbar() {
   const [menu, setMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  
+  const navigate = useNavigate();
+
   const navItems = [
     { title: "Home", to: "home" },
     { title: "How It Works", to: "works" },
@@ -40,7 +37,7 @@ export default function Navbar() {
 
   const toggleMenu = () => setMenu((prev) => !prev);
 
-  // Close on Escape key
+  // Close menu with ESC key
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && setMenu(false);
     window.addEventListener("keydown", handleEsc);
@@ -54,47 +51,48 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll when mobile menu is open
+  // Disable background scrolling when menu opens
   useEffect(() => {
     document.body.style.overflow = menu ? "hidden" : "auto";
-    return () => {
-      document.body.style.overflow = "auto";
-    };
+    return () => (document.body.style.overflow = "auto");
   }, [menu]);
 
-  // Smooth scroll or redirect to home sections
+  // Smooth scroll behavior
   const handleNavClick = (id) => {
     setMenu(false);
+
     if (location.pathname !== "/") {
-      window.location.href = `/#${id}`;
-    } else {
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
+      navigate(`/#${id}`);
+      return;
     }
+
+    const section = document.getElementById(id);
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
+  // SIGN UP button → plays loading → onboard
   const handleSignupClick = () => {
     setLoading(true);
     setTimeout(() => {
-      window.location.href = "/onboard";
+      navigate("/onboard");
     }, 1500);
   };
 
+  // LOGIN → go directly to onboard (OPTION A)
   const handleLoginClick = () => {
     setMenu(false);
-    // Add login logic here if needed
+    navigate("/onboard");
   };
 
   return (
     <>
+      <LoadingScreen show={loading} />
+
       <header
         className={`fixed top-0 left-0 w-full z-[9999] bg-white md:bg-[#F7F5F9] transition-all duration-300 ${
           isScrolled ? "shadow-md" : ""
         }`}
       >
-        {/* Navbar Container */}
         <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 md:px-6 py-3">
           {/* Logo */}
           <Link
@@ -131,12 +129,13 @@ export default function Navbar() {
             >
               SIGN UP
             </button>
-            <Link
-              to="/login"
+
+            <button
+              onClick={handleLoginClick}
               className="px-5 py-2.5 rounded-sm bg-green-600 hover:bg-green-700 text-white transition-colors font-medium"
             >
               LOG IN
-            </Link>
+            </button>
           </div>
 
           {/* Mobile Toggle */}
@@ -157,7 +156,7 @@ export default function Navbar() {
           onClick={() => setMenu(false)}
         />
 
-        {/* Mobile Menu Drawer */}
+        {/* Mobile Drawer */}
         <div
           className={`fixed top-0 right-0 h-full w-72 sm:w-80 bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-[10000] md:hidden ${
             menu ? "translate-x-0" : "translate-x-full"
@@ -165,11 +164,7 @@ export default function Navbar() {
         >
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <img src={NavbarLogo} alt="CoSplitz" className="h-8" />
-            <button
-              onClick={toggleMenu}
-              aria-label="Close menu"
-              className="p-2 rounded-md hover:bg-gray-100 focus:outline-none"
-            >
+            <button onClick={toggleMenu} className="p-2 rounded-md hover:bg-gray-100">
               <X size={24} />
             </button>
           </div>
@@ -193,17 +188,16 @@ export default function Navbar() {
             >
               SIGN UP
             </button>
-            <Link
-              to="/login"
+
+            <button
               onClick={handleLoginClick}
               className="w-full text-center px-5 py-3 rounded-sm bg-green-600 hover:bg-green-700 text-white font-medium"
             >
               LOG IN
-            </Link>
+            </button>
           </div>
         </div>
       </header>
-
     </>
   );
 }
