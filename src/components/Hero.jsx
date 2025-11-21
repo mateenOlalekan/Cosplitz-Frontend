@@ -24,12 +24,9 @@ export default function WaveBackground() {
 
   return (
     <>
-      {/* ====== Sticky Header ====== */}
 
-
-      {/* ====== Hero Section ====== */}
       <section
-        id="hero"
+        id="home"
         className="relative w-full min-h-screen pt-24 md:pt-24  bg-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto max-md:px-4 h-full">

@@ -43,16 +43,16 @@ export default function Why() {
   return (
     <section
       id="features"
-      className="relative flex justify-center items-center w-full bg-white py-8 sm:py-12 md:py-16 lg:py-20 px-4 xs:px-6 sm:px-8 lg:px-12 xl:px-16 overflow-hidden"
+      className="relative w-full bg-white py-12 md:py-20 px-4 sm:px-6 md:px-8"
     >
-      <div className="max-w-7xl w-full mx-auto flex flex-col items-center">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
         {/* ===== Section Header ===== */}
         <div
-          className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-14 w-full max-w-3xl mx-auto"
+          className="text-center mb-12 md:mb-16 w-full"
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <h1 className="text-2xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-3 md:mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-4">
             Why Choose CoSplitz
           </h1>
           <div className="w-16 h-1 bg-[#1F8225] mx-auto rounded-full"></div>
@@ -60,17 +60,17 @@ export default function Why() {
 
         {/* ===== Cards Grid ===== */}
         <div
-          className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 w-full"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 w-full"
           data-aos="fade-up"
           data-aos-delay="200"
         >
           {whydata.map((data, index) => (
             <div
               key={index}
-              className="flex flex-col bg-[#E8F7E3] rounded-2xl sm:rounded-3xl p-2 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full"
+              className="flex flex-col bg-[#E8F7E3] rounded-2xl p-5 sm:p-6 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 h-full"
             >
               {/* Image Container */}
-              <div className="w-full h-40 xs:h-44 sm:h-48 md:h-52 lg:h-56 rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 md:mb-5 flex items-center justify-center bg-white">
+              <div className="w-full h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden mb-5 sm:mb-6 flex items-center justify-center bg-white flex-shrink-0">
                 <img
                   src={data.img}
                   alt={data.title}
@@ -81,11 +81,11 @@ export default function Why() {
               </div>
 
               {/* Text Content */}
-              <div className="flex flex-col gap-2 sm:gap-3 text-center flex-grow">
-                <h3 className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold text-gray-900 px-1">
+              <div className="flex flex-col gap-3 text-center flex-grow">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900">
                   {data.title}
                 </h3>
-                <p className="text-xs xs:text-sm sm:text-base text-gray-700 leading-relaxed sm:leading-relaxed px-1 sm:px-2">
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   {data.desc}
                 </p>
               </div>

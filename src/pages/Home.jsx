@@ -10,21 +10,13 @@
    return (
      <>
       <Navbar />
-      <main className="flex flex-col scroll-smooth">
-        <section id="home">
-          <Hero />
-        </section>
-        <section id="works">
-          <Work />
-        </section>
-        <section id="features">
-          <Why />
-        </section>
-        <section id="community">
-          <Who />
-        </section>
-        <Footer />
-      </main>
+        <main className="flex flex-col scroll-smooth">
+            <Hero />
+            <Work />
+            <Why />
+            <Who />
+        </main>
+      <Footer />
      </>
    )
  }
