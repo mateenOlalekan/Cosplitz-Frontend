@@ -172,7 +172,7 @@ export default function Login() {
   };
 
   const handleSuccessContinue = () => {
-    navigate("/login");
+    navigate("/dashboard");
   };
 
   const handleBackToStep1 = () => {

@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import "./App.css";
 
 import NavbarLogo from "../src/assets/logo.svg";
+
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
@@ -21,27 +22,19 @@ const Overview = lazy(() => import("./pages/Dashboard/DashHome"));
 const Analytics = lazy(() => import("./pages/Dashboard/Analytics"));
 const SettingsLayout = lazy(() => import("./pages/Dashboard/Settings/SettingsLayout"));
 const MyProfile = lazy(() => import("./pages/Dashboard/Settings/MyProfile"));
-const Notifications = lazy(() => import("./pages/Dashboard/Settings/Notifications"));
+const NotificationSettings = lazy(() => import("./pages/Dashboard/Settings/Notifications"));
 const Verification = lazy(() => import("./pages/Dashboard/Settings/Verification"));
 const Support = lazy(() => import("./pages/Dashboard/Settings/Support"));
 const Payment = lazy(() => import("./pages/Dashboard/Payment"));
 const Wallet = lazy(() => import("./pages/Dashboard/Wallet"));
 const CreateSplitzPage = lazy(() => import("./pages/Dashboard/CreateSplitz"));
-const Notification = lazy(() => import("./pages/Dashboard/Notification"));
+const NotificationPage = lazy(() => import("./pages/Dashboard/Notification"));
 
-// Loading screen
-
-
-
-
-function Loading({ show }) {
+// Loading Screen
+function Loading() {
   return (
-    <div
-      className={`fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999]
-        transition-opacity duration-[3s]
-        ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-    >
-      {/* Logo with bounce animation */}
+    <div className="fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999] 
+                    transition-opacity duration-[3000ms] opacity-100 pointer-events-auto">
       <div className="flex justify-center items-center animate-bounce">
         <img
           src={NavbarLogo}
@@ -49,17 +42,16 @@ function Loading({ show }) {
           alt="Logo"
         />
       </div>
-
-
     </div>
   );
 }
 
 export default function App() {
   return (
-    <Suspense fallback={<Loading show={true} />}>
+    <Suspense fallback={<Loading />}>
       <Routes>
-        {/* Public routes */}
+
+        {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -69,30 +61,31 @@ export default function App() {
         <Route path="/identify" element={<Identify />} />
         <Route path="/onboarding-steps" element={<OnboardingSteps />} />
 
-        {/* Password management */}
+        {/* Password Routes */}
         <Route path="/forgot-password" element={<Forget />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="/password-reset-success" element={<PasswordResetSuccess />} />
 
-        {/* Dashboard */}
+        {/* Dashboard Routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="create-split" element={<CreateSplitzPage />} />
           <Route path="wallet" element={<Wallet />} />
           <Route path="payment" element={<Payment />} />
-          <Route path="notification" element={<Notification />} />
+          <Route path="notification" element={<NotificationPage />} />
 
-          {/* Nested settings */}
+          {/* Nested Settings */}
           <Route path="settings" element={<SettingsLayout />}>
             <Route index element={<MyProfile />} />
             <Route path="profile" element={<MyProfile />} />
-            <Route path="notifications" element={<Notifications />} />
+            <Route path="notifications" element={<NotificationSettings />} />
             <Route path="verification" element={<Verification />} />
             <Route path="support" element={<Support />} />
           </Route>
         </Route>
+
       </Routes>
     </Suspense>
   );
