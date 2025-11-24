@@ -51,7 +51,7 @@ function Header({ setSidebarOpen, sidebarOpen, isMobile }) {
       </div>
 
       {/* Location Info */}
-      <div className="px-4 py-1 text-sm text-gray-600">
+      <div className="pl-6 py-3 p text-sm text-gray-600">
         Ikeja, Lagos, Nigeria
       </div>
     </header>
