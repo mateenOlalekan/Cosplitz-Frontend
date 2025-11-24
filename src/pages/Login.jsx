@@ -87,10 +87,13 @@ export default function Login() {
         className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 py-10 overflow-y-auto"
       >
         
-        {/* Logo */}
-        <div className="w-full mb-8 flex justify-start">
-          <img src={logo} alt="Logo" className="w-16" />
-        </div>
+<div className="w-full mb-4 flex justify-start">
+  <img
+    src={logo}
+    alt="Logo"
+    className="w-10 sm:w-16 lg:w-20 object-contain"
+  />
+</div>
 
         {/* Header */}
         <div className="w-full text-center mb-4">

@@ -338,11 +338,11 @@ export default function Login() {
       {/* === RIGHT SIDE === */}
       <div className="flex flex-1 flex-col items-center justify-start bg-white p-4 sm:p-6 overflow-y-auto">
         {/* Logo */}
-<div className="w-full mb-8 flex justify-start">
+<div className="w-full mb-4 flex justify-start">
   <img
     src={logo}
     alt="Logo"
-    className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+    className="w-10 sm:w-16 lg:w-20 object-contain"
   />
 </div>
 
@@ -426,7 +426,7 @@ export default function Login() {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleFormSubmit} className="space-y-3">
+                <form onSubmit={handleFormSubmit} className="space-y-2">
                   {["firstName", "lastName", "email", "nationality"].map(
                     (field) => (
                       <div key={field}>

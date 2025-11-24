@@ -3,26 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import NavbarLogo from "../../assets/logo.svg";
 import { Menu, X } from "lucide-react";
 
-export function LoadingScreen({ show }) {
-  return (
-    <div
-      className={`fixed inset-0 bg-green-600 flex flex-col items-center justify-center z-[99999]
-        transition-opacity duration-1000
-        ${show ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-    >
-      <div className="w-full flex justify-center items-center bg-green-650">
-        <img
-          src={NavbarLogo}
-          className="w-20 h-20 md:w-40 md:h-40 object-cover drop-shadow-xl"
-          draggable="false"
-        />
-      </div>
-    </div>
-  );
-}
-
 export default function Navbar() {
-  const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -70,15 +51,13 @@ export default function Navbar() {
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
-  // SIGN UP button → plays loading → onboard
+  // Removed setTimeout - navigates immediately
   const handleSignupClick = () => {
-    setLoading(true);
-    setTimeout(() => {
-      navigate("/onboard");
-    }, 1500);
+    setMenu(false);
+    navigate("/onboard");
   };
 
-  // LOGIN → go directly to onboard (OPTION A)
+  // LOGIN → go directly to onboard
   const handleLoginClick = () => {
     setMenu(false);
     navigate("/onboard");
@@ -86,8 +65,6 @@ export default function Navbar() {
 
   return (
     <>
-      <LoadingScreen show={loading} />
-
       <header
         className={`fixed top-0 left-0 w-full z-[9999] bg-white md:bg-[#F7F5F9] transition-all duration-300 ${
           isScrolled ? "shadow-md" : ""
