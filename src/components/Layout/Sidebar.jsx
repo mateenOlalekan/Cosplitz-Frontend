@@ -2,6 +2,7 @@
 import { NavLink } from "react-router-dom";
 import {  Home,  Share2,  MessageSquare,  Wallet,  MapPin,  BarChart3,  X,} from "lucide-react";
 import logo from "../../assets/logo.svg";
+import user from "../../assets/image-60.svg";
 
 const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   const handleOverlayClick = () => {
@@ -46,14 +47,13 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
           )}
 
           {/* Logo */}
-<div className="w-full mb-8 flex justify-start">
-  <img
-    src={logo}
-    alt="Logo"
-    className="w-1 object-contain"
-  />
-</div>
-
+            <div className="w-full mb-4 flex justify-start">
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-10 md:h-12 object-cover w-auto select-none pointer-events-none"
+              />
+            </div>
 
           {/* Navigation Links */}
           <nav className="space-y-1 flex-1">
@@ -101,11 +101,11 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
           </div>
 
           {/* Profile */}
-          <button className="w-full mt-6 flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg">
+          <button className="w-full mt-6 flex items-center gap-3 py-2 hover:bg-gray-50 rounded-lg">
             <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=alice"
+              src={user}
               alt="Profile"
-              className="w-10 h-10 rounded-full"
+              className="w-12 h-12 rounded-full"
             />
             <div className="text-left">
               <p className="text-sm font-semibold text-gray-900 truncate">

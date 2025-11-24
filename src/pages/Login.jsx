@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { PiAppleLogoBold } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 import loginlogo from "../assets/loginmain.jpg";
 import logo from "../assets/logo.svg";
@@ -87,13 +87,10 @@ export default function Login() {
         className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 py-10 overflow-y-auto"
       >
         
-<div className="w-full mb-4 flex justify-start">
-  <img
-    src={logo}
-    alt="Logo"
-    className="w-10 sm:w-16 lg:w-20 object-contain"
-  />
-</div>
+        {/* Logo */}
+        <div className="w-full mb-8 flex justify-start">
+          <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto select-none pointer-events-none" />
+        </div>
 
         {/* Header */}
         <div className="w-full text-center mb-4">
@@ -225,8 +222,8 @@ export default function Login() {
 
           {/* Footer */}
           <p className="text-center text-sm text-gray-600">
-            Already have an account?{" "}
-            <a className="text-green-600 font-medium hover:underline">Log In</a>
+            Don't have an account?{" "}
+            <Link to="/register" className="text-green-600 font-medium hover:underline">register</Link>
           </p>
 
           <p className="text-center text-sm">
