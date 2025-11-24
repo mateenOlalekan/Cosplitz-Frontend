@@ -1,6 +1,27 @@
 import { useState } from "react";
 import { ChevronLeft, CheckCircle } from "lucide-react";
-import {  UtensilsCrossed,  Users,  DollarSign,  Zap,  Clock,  TrendingUp,  BookOpen,  Globe,  Briefcase,  MapPin,  Lock,  Eye,  Check,  Plane,  Wrench,  Lightbulb,  FileInput,  Package,  Headphones,  Hotel,  Truck,} from "lucide-react";
+import {
+  UtensilsCrossed,
+  Users,
+  DollarSign,
+  Zap,
+  Clock,
+  TrendingUp,
+  BookOpen,
+  Globe,
+  Briefcase,
+  MapPin,
+  Lock,
+  Eye,
+  Check,
+  Plane,
+  Wrench,
+  Lightbulb,
+  FileInput,
+  Package,
+  Headphones,
+  Hotel,  Truck,
+} from "lucide-react";
 
 const steps = [
   {
@@ -60,7 +81,7 @@ const steps = [
   {
     title: "What is your top goal for using Co-splitz?",
     description:
-      "We’ll customize your dashboard based on this primary motivation.",
+      "We'll customize your dashboard based on this primary motivation.",
     type: "single",
     options: [
       { id: "save", label: "Save Money", icon: DollarSign },
@@ -80,8 +101,68 @@ const IconComponent = ({ IconType }) => (
   <IconType className="w-8 h-8 text-green-600" />
 );
 
+const Dashboard = ({ userResponses }) => {
+  return (
+    <div className="h-screen flex flex-col bg-gradient-to-br from-green-50 to-white">
+      <div className="flex-1 flex items-center justify-center px-4">
+        <div className="max-w-2xl w-full text-center">
+          <div className="mb-6">
+            <CheckCircle className="w-24 h-24 text-green-600 mx-auto mb-6" />
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">
+            🎉 Welcome to Co-splitz!
+          </h1>
+          <p className="text-lg text-gray-600 mb-8">
+            Your profile has been set up successfully. Let's start finding great splits!
+          </p>
+
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-8 text-left">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Your Profile Summary</h2>
+            <div className="space-y-4">
+              <div className="border-b pb-3">
+                <p className="text-sm text-gray-600">Interests:</p>
+                <p className="font-medium text-gray-900">
+                  {userResponses[0].selected.join(", ") || "Custom interests"}
+                </p>
+              </div>
+              <div className="border-b pb-3">
+                <p className="text-sm text-gray-600">Current Situation:</p>
+                <p className="font-medium text-gray-900">
+                  {steps[1].options.find(o => o.id === userResponses[1].selected[0])?.label || "Other"}
+                </p>
+              </div>
+              <div className="border-b pb-3">
+                <p className="text-sm text-gray-600">Top Priorities:</p>
+                <p className="font-medium text-gray-900">
+                  {userResponses[2].selected.map(id => 
+                    steps[2].options.find(o => o.id === id)?.label
+                  ).join(", ")}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-600">Primary Goal:</p>
+                <p className="font-medium text-gray-900">
+                  {steps[3].options.find(o => o.id === userResponses[3].selected[0])?.label || "Other"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => window.location.href = "#/dashboard"}
+            className="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function CoSplitzOnboarding() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
   const [selections, setSelections] = useState(
     steps.map(() => ({ selected: [], other: "" }))
   );
@@ -105,7 +186,10 @@ export default function CoSplitzOnboarding() {
       else stepSelections.push(id);
     }
 
-    newSelections[currentStep] = { ...newSelections[currentStep], selected: stepSelections };
+    newSelections[currentStep] = {
+      ...newSelections[currentStep],
+      selected: stepSelections,
+    };
     setSelections(newSelections);
   };
 
@@ -122,20 +206,29 @@ export default function CoSplitzOnboarding() {
   };
 
   const handleContinue = () => {
-    if (isStepComplete() && currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
+    if (isStepComplete()) {
+      if (currentStep < steps.length - 1) {
+        setCurrentStep((prev) => prev + 1);
+      } else {
+        setIsComplete(true);
+      }
     }
   };
 
   const handleBack = () => {
-    if (currentStep > 0) setCurrentStep((prev) => prev - 1);
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
+    }
   };
 
   const progress = ((currentStep + 1) / steps.length) * 100;
 
+  if (isComplete) {
+    return <Dashboard userResponses={selections} />;
+  }
+
   return (
     <div className="h-screen flex flex-col bg-white text-gray-900">
-      {/* Scrollable content container */}
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4">
         <div className="max-w-2xl mx-auto flex flex-col h-full">
           {/* === Header === */}
@@ -222,18 +315,8 @@ export default function CoSplitzOnboarding() {
             >
               {currentStep === steps.length - 1
                 ? "Complete Setup"
-                : `Continue${
-                    selected.length > 0 ? ` (${selected.length})` : ""
-                  }`}
+                : `Continue${selected.length > 0 ? ` (${selected.length})` : ""}`}
             </button>
-
-            {currentStep === steps.length - 1 && isStepComplete() && (
-              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
-                <p className="text-green-700 font-medium text-sm sm:text-base">
-                  🎉 All steps completed successfully!
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </div>
