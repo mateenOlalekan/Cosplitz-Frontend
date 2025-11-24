@@ -50,7 +50,7 @@ export default function Onboarding() {
   const current = pages.find((p) => p.id === step);
 
   return (
-    <div className="relative flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="relative flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-100 p-3 rounded-2xl">
 
       {/* Header */}
       <div className="absolute top-0 left-0 w-full flex justify-between items-center px-4 sm:px-6 md:px-10 py-4 md:py-6 z-20">
@@ -88,7 +88,7 @@ export default function Onboarding() {
         <img
           src={current.image}
           alt={current.title}
-          className="w-full h-full object-cover rounded-none lg:rounded-xl transition-transform duration-700 hover:scale-105"
+          className="w-full h-full object-cover rounded-none lg:rounded-xl transition-transform duration-1500 hover:scale-95"
         />
       </div>
 
@@ -96,7 +96,7 @@ export default function Onboarding() {
       <div className="flex-1 flex flex-col justify-center items-center 
       text-center bg-white/80 backdrop-blur-sm
       p-6 sm:p-10 md:p-14 lg:p-20
-      rounded-t-3xl md:rounded-none shadow-inner">
+     lg:rounded-xl md:rounded-none shadow-inner">
 
         <div className="max-w-md">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">

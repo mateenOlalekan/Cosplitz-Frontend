@@ -30,129 +30,6 @@ function TimerDisplay() {
   );
 }
 
-// ✅ Email OTP Modal (No buttons - auto verifies)
-function EmailOTPModal({ onVerify, onClose, error, setError }) {
-  const [otp, setOtp] = useState("");
-  const [isExpired, setIsExpired] = useState(false);
-  const correctOTP = "123456";
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsExpired(true), 5 * 60 * 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Auto-verify when OTP is correct
-  useEffect(() => {
-    if (otp.length === 6) {
-      if (isExpired) {
-        setError("OTP has expired. Please request a new one.");
-        return;
-      }
-
-      if (otp === correctOTP) {
-        onVerify();
-        setError("");
-      } else {
-        setError("Invalid OTP. Please try again.");
-        // Don't clear OTP immediately, let user see the error and correct it
-      }
-    }
-  }, [otp, isExpired, onVerify, setError]);
-
-  const handleOtpChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, "").slice(0, 6);
-    setOtp(value);
-    if (value.length < 6) {
-      setError(""); // Clear error when user starts typing again
-    }
-  };
-
-  return (
-    <div 
-      className="fixed inset-0 flex h-screen justify-center items-center z-50 bg-black/50 p-3 sm:p-4"
-      onClick={onClose} // Close modal when clicking backdrop
-    >
-      <div 
-        className="w-full max-w-sm sm:max-w-md md:max-w-lg bg-white rounded-3xl shadow-2xl p-3 overflow-hidden"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
-      >
-        {/* Header */}
-        <div className="my-3 flex items-center justify-center">
-          <img
-            src={logo}
-            alt="Cosplitz Logo"
-            className="w-20  h-auto object-contain"
-          />
-        </div>
-
-        {/* Title */}
-        <div className="flex justify-center items-center w-full">
-          <div className="px-4 w-full">
-            <div className="bg-green-600 text-white py-2 sm:py-3 px-4 sm:px-6 text-center text-lg sm:text-xl font-bold w-full rounded-xl">
-              Email OTP Verification
-            </div>
-          </div>
-        </div>
-
-        {/* Content */}
-        <div className="px-4 py-2">
-          <p className="text-gray-700 text-sm sm:text-base">
-            Hello, <br /> Your One-time Password for email verification is:
-          </p>
-
-          {/* OTP Input */}
-          <input
-            type="text"
-            value={otp}
-            onChange={handleOtpChange}
-            maxLength={6}
-            className="mt-3 w-full text-center text-xl tracking-widest bg-gray-100 font-bold border-2 border-green-600 rounded-lg px-3 py-2 sm:px-4 sm:py-3 focus:outline-none focus:ring-2 focus:ring-green-500"
-            placeholder="Enter 6-digit code"
-            disabled={isExpired}
-            autoFocus
-          />
-
-          <div className="py-2 text-sm rounded-lg">
-            <p className="text-gray-600 leading-relaxed">
-              Use this code to confirm your email — valid for 5 minutes.
-              <br />
-              If you didn't register with{" "}
-              <span className="text-green-600 font-semibold">COSPLITZ</span>,
-              ignore this message.
-            </p>
-          </div>
-
-          {/* Error */}
-          {error && (
-            <div
-              className={`p-3 sm:p-4 rounded-lg flex items-center gap-2 sm:gap-3 ${
-                error.includes("Invalid OTP") || error.includes("expired")
-                  ? "bg-red-100 text-red-800"
-                  : "bg-green-100 text-green-800"
-              }`}
-            >
-              <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-              <p className="text-sm sm:text-base font-medium">{error}</p>
-            </div>
-          )}
-
-          {/* Instructions */}
-          <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-            <p className="text-blue-700 text-sm text-center">
-              Enter the 6-digit code above. You will automatically proceed when the code is correct.
-            </p>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="px-4 sm:px-6 py-3 sm:py-4 text-center text-gray-600">
-          <p className="text-xs sm:text-sm">© 2025 Cosplitz. All rights reserved.</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ✅ Email Verification Step Component
 function EmailVerificationStep({ onVerify, onBack, error }) {
   const [emailOtp, setEmailOtp] = useState("");
@@ -163,8 +40,6 @@ function EmailVerificationStep({ onVerify, onBack, error }) {
     if (emailOtp.length === 6) {
       if (emailOtp === correctEmailOTP) {
         onVerify();
-      } else {
-        // Error is handled by parent
       }
     }
   }, [emailOtp, onVerify]);
@@ -238,8 +113,6 @@ function EmailVerificationStep({ onVerify, onBack, error }) {
       {error && (
         <p className="text-red-600 text-sm mt-2 text-center">{error}</p>
       )}
-
- 
     </div>
   );
 }
@@ -256,7 +129,6 @@ export default function Login() {
     agreeToTerms: false,
   });
   const [currentStep, setCurrentStep] = useState(1);
-  const [showOtpModal, setShowOtpModal] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -290,17 +162,12 @@ export default function Login() {
       return;
     }
     setError("");
-    setShowOtpModal(true);
+    // Directly proceed to email verification step
+    setCurrentStep(2);
   };
 
   const handleEmailOtpSubmit = () => {
     setCurrentStep(3);
-    setError("");
-  };
-
-  const handleEmailOTPVerify = () => {
-    setShowOtpModal(false);
-    setCurrentStep(2);
     setError("");
   };
 
@@ -314,7 +181,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden p-3 rounded-2xl">
       {/* === LEFT SIDE === */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#F8EACD] flex-col justify-center items-center rounded-xl p-6">
         <div className="max-w-md w-full flex flex-col items-center text-center space-y-4">
@@ -338,14 +205,13 @@ export default function Login() {
       {/* === RIGHT SIDE === */}
       <div className="flex flex-1 flex-col items-center justify-start bg-white p-4 sm:p-6 overflow-y-auto">
         {/* Logo */}
-<div className="w-full mb-4 flex justify-start">
-  <img
-    src={logo}
-    alt="Logo"
-    className="w-10 sm:w-16 lg:w-20 object-contain"
-  />
-</div>
-
+        <div className="w-full mb-8 flex justify-start">
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-16 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+          />
+        </div>
 
         {/* === MAIN FORM === */}
         <div className="w-full max-w-2xl flex flex-col justify-center rounded-xl shadow-md border border-gray-100 p-3 sm:p-6 bg-white">
@@ -426,7 +292,7 @@ export default function Login() {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleFormSubmit} className="space-y-2">
+                <form onSubmit={handleFormSubmit} className="space-y-3">
                   {["firstName", "lastName", "email", "nationality"].map(
                     (field) => (
                       <div key={field}>
@@ -553,16 +419,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-
-      {/* === OTP MODAL === */}
-      {showOtpModal && (
-        <EmailOTPModal
-          onVerify={handleEmailOTPVerify}
-          onClose={() => setShowOtpModal(false)}
-          error={error}
-          setError={setError}
-        />
-      )}
     </div>
   );
 }

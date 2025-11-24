@@ -60,7 +60,7 @@ export default function Navbar() {
   // LOGIN → go directly to onboard
   const handleLoginClick = () => {
     setMenu(false);
-    navigate("/onboard");
+    navigate("/login");
   };
 
   return (

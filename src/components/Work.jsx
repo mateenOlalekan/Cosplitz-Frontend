@@ -93,7 +93,7 @@ export default function Work() {
                 <p className="text-lg md:text-xl font-semibold text-gray-700">
                   {step.id}
                 </p>
-                {index < 2 && (
+                {index < 3 && (
                   <img
                     src={Arrow}
                     alt="Arrow Down"

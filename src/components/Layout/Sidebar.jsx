@@ -50,7 +50,7 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   <img
     src={logo}
     alt="Logo"
-    className="w-10 sm:w-20 md:w-24 lg:w-28 xl:w-32 object-contain"
+    className="w-1 object-contain"
   />
 </div>
 
