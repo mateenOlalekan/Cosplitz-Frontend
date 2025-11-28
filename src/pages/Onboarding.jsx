@@ -16,45 +16,42 @@ export default function Onboarding() {
       image: onboard1,
       title: "Split Bills Easily",
       description:
-        "Tired of awkward math at the table? Cosplitz makes it simple to divide expenses with friends, family, or coworkers — no calculators needed.",
+        "Tired of awkward math at the table? Cosplitz makes it simple to divide expenses with friends.",
     },
     {
       id: 2,
       image: onboard2,
       title: "Fair for Everyone",
       description:
-        "Everyone pays their fair share. Whether it’s rent, dinner, or travel costs, Cosplitz keeps things transparent so no one feels left out.",
+        "Everyone pays their fair share. Transparent and simple expense management.",
     },
     {
       id: 3,
       image: onboard3,
       title: "Start Your Journey",
       description:
-        "No more chasing people for money. Get reminders, track balances, and settle up with just a tap.",
+        "Track balances, settle up, and stay organized — all in one place.",
     },
   ];
 
   const handleNext = () => {
-    if (step < 3) setStep(step + 1);
-    else navigate("/register");
+    if (step < pages.length) setStep(step + 1);
+    else navigate("/signup");
   };
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSkip = () => {
-    navigate("/register");
-  };
+  const handleSkip = () => navigate("/register");
 
   const current = pages.find((p) => p.id === step);
 
   return (
-    <div className="relative flex flex-col lg:flex-row h-screen w-full overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-100 p-3 rounded-2xl">
+    <div className="relative flex flex-col xl:flex-row h-screen w-full overflow-hidden  p-4 rounded-2xl">
 
       {/* Header */}
-      <div className="absolute top-0 left-0 w-full flex justify-between items-center px-4 sm:px-6 md:px-10 py-4 md:py-6 z-20">
-
+      <div className="absolute top-0 left-0 w-full flex justify-between items-center p-10 z-20">
         {step > 1 ? (
           <button
             onClick={handleBack}
@@ -66,7 +63,7 @@ export default function Onboarding() {
           <div />
         )}
 
-        {step < 3 ? (
+        {step < pages.length ? (
           <button
             onClick={handleSkip}
             className="text-green-700 font-semibold hover:underline transition m-2"
@@ -83,35 +80,31 @@ export default function Onboarding() {
         )}
       </div>
 
-      {/* Image Section */}
-      <div className="hidden md:flex w-full lg:w-1/2 h-1/3 md:h-full">
+      {/* LEFT SECTION (Image) → visible ONLY on xl and above */}
+      <div className="hidden xl:block w-1/2 h-full">
         <img
           src={current.image}
           alt={current.title}
-          className="w-full h-full object-cover rounded-none lg:rounded-xl transition-transform duration-1500 hover:scale-95"
+          className="w-full h-full object-cover rounded-xl transition-all duration-1000 ease-in-out hover:scale-105"
         />
       </div>
 
-      {/* Content Section */}
-      <div className="flex-1 flex flex-col justify-center items-center 
-      text-center bg-white/80 backdrop-blur-sm
-      p-6 sm:p-10 md:p-14 lg:p-20
-     lg:rounded-xl md:rounded-none shadow-inner">
-
-        <div className="max-w-md">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+      {/* RIGHT SECTION */}
+      <div className="flex-1 flex justify-center items-center px-4 lg:px-10 w-full h-screen bg-white">
+        <div className=" w-full  max-w-lg p-8 md:p-1 rounded-2xl  text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {current.title}
           </h1>
 
-          <p className="text-gray-600 text-sm sm:text-base md:text-lg mb-6 leading-relaxed">
+          <p className="text-gray-600 text-base md:text-lg mb-6 leading-relaxed">
             {current.description}
           </p>
 
           <button
             onClick={handleNext}
-            className="bg-green-600 text-white w-full text-base sm:text-lg px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-green-700 transition-all"
+            className="bg-green-600 text-white w-full text-lg px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-green-700 transition-all"
           >
-            {step === 3 ? "Sign Up" : "Next"}
+            {step === pages.length ? "Sign Up" : "Next"}
           </button>
 
           {/* Progress Dots */}
@@ -126,8 +119,8 @@ export default function Onboarding() {
             ))}
           </div>
         </div>
-
       </div>
+
     </div>
   );
 }

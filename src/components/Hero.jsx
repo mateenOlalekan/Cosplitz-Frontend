@@ -27,23 +27,23 @@ export default function WaveBackground() {
 
       <section
         id="home"
-        className="relative w-full h-screen pt-20 md:pt-20  bg-white overflow-hidden"
+        className="relative w-full  pt-20 md:pt-16  bg-white overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 max-md:px-4 h-full">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-16 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
+        <div className="max-w-7xl mx-auto px-4  h-full">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-10 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
 
             {/* ====== Left Content ====== */}
             <div
               className="w-full md:w-1/2 space-y-3 md:space-y-4 flex flex-col justify-center"
               data-aos="fade-right"
             >
-              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl  font-extrabold text-gray-900 leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl  font-bold text-gray-900 leading-tight tracking-tight">
                 Split Smarter,
                 <br/>
                 Spend Together
               </h1>
 
-              <p className="text-base sm:text-[36] md:text-lg lg:text-xl text-gray-600 leading-relaxed tracking-wide max-w-md">
+              <p className="text-base sm:text-[36] md:text-lg text-gray-600 leading-relaxed tracking-wide max-w-md">
                 CoSplitz helps you share expenses, organize group payments, and buy things together — whether you're a seller or just need people to split costs with.
               </p>
 

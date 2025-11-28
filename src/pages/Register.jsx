@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Eye, EyeOff, Mail, AlertCircle, ChevronLeft } from "lucide-react";
+import { Eye, EyeOff, Mail, AlertCircle, ChevronLeft, Check, X } from "lucide-react";
 import loginlogo from "../assets/login.jpg";
 import logo from "../assets/logo.svg";
 import { FcGoogle } from "react-icons/fc";
@@ -27,6 +27,47 @@ function TimerDisplay() {
         {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </span>
     </p>
+  );
+}
+
+// ✅ Password validation component
+function PasswordValidation({ password }) {
+  const validations = [
+    {
+      label: "8+ characters",
+      isValid: password.length >= 8
+    },
+    {
+      label: "Uppercase letter",
+      isValid: /[A-Z]/.test(password)
+    },
+    {
+      label: "Digit",
+      isValid: /\d/.test(password)
+    }
+  ];
+
+  return (
+    <div className="flex flex-col gap-2 mt-2">
+      {validations.map((validation, index) => (
+        <div key={index} className="flex items-center gap-3">
+          <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+            validation.isValid ? 'bg-green-100' : 'bg-gray-100'
+          }`}>
+            {validation.isValid ? (
+              <Check size={14} className="text-green-600" />
+            ) : (
+              <X size={14} className="text-gray-400" />
+            )}
+          </div>
+          <span className={`text-xs ${
+            validation.isValid ? 'text-green-600' : 'text-gray-500'
+          }`}>
+            {validation.label}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -148,6 +189,13 @@ export default function Login() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    
+    // Password validation
+    const isPasswordValid = 
+      formData.password.length >= 8 &&
+      /[A-Z]/.test(formData.password) &&
+      /\d/.test(formData.password);
+
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -157,10 +205,17 @@ export default function Login() {
       setError("Please fill out all fields.");
       return;
     }
+
+    if (!isPasswordValid) {
+      setError("Please ensure your password meets all requirements.");
+      return;
+    }
+
     if (!formData.agreeToTerms) {
       setError("Please agree to the terms and conditions.");
       return;
     }
+    
     setError("");
     // Directly proceed to email verification step
     setCurrentStep(2);
@@ -181,9 +236,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden px-8 py-3.5 rounded-2xl">
+    <div className="flex flex-col lg:flex-row h-screen bg-[#F7F5F9] overflow-hidden md:px-8 md:py-3.5 rounded-2xl">
       {/* === LEFT SIDE === */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#F8EACD] flex-col justify-center items-center rounded-xl p-6">
+      <div className="hidden md:block lg:flex lg:w-1/2 bg-[#F8EACD] flex-col justify-center items-center rounded-xl p-6">
         <div className="max-w-md w-full flex flex-col items-center text-center space-y-4">
           <img
             src={loginlogo}
@@ -203,9 +258,9 @@ export default function Login() {
       </div>
 
       {/* === RIGHT SIDE === */}
-      <div className="flex flex-1 flex-col items-center justify-start bg-white p-4 sm:p-6 overflow-y-auto">
+      <div className="flex flex-1 flex-col items-center justify-start bg-white p-2 sm:p-4 overflow-y-auto">
         {/* Logo */}
-        <div className="w-full mb-8 flex justify-start">
+        <div className="w-full mb-4 flex justify-start">
           <img
             src={logo}
             alt="Logo"
@@ -242,7 +297,7 @@ export default function Login() {
           </div>
 
           {/* === STEP CONTENT === */}
-          <div className="w-full max-w-2xl p-4 sm:p-6 bg-white">
+          <div className="w-full max-w-2xl p-2 sm:p-4 bg-white">
             {/* === STEP 1 === */}
             {currentStep === 1 && (
               <>
@@ -254,13 +309,13 @@ export default function Login() {
                 </p>
 
                 {error && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <div className="mb-2 p-3 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-red-600 text-sm text-center">{error}</p>
                   </div>
                 )}
 
                 {/* Social Buttons */}
-                <div className="grid grid-cols-1 gap-2 mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-3">
                   <button 
                     type="button"
                     className="w-full flex items-center justify-center gap-3 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
@@ -337,6 +392,9 @@ export default function Login() {
                       </button>
                     </div>
                   </div>
+
+                  {/* Password Validation */}
+                  <PasswordValidation password={formData.password} />
 
                   {/* Terms */}
                   <div className="flex items-start gap-2">
