@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Share2, MessageSquare, Wallet, MapPin, BarChart3, Bell, Settings, Menu, X, ChevronLeft, Check, Copy } from 'lucide-react';
+import { ChevronLeft, Check, Copy } from 'lucide-react';
 
 const PaymentPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);

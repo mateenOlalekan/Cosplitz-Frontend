@@ -181,7 +181,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden p-3 rounded-2xl">
+    <div className="flex flex-col lg:flex-row h-screen bg-gray-50 overflow-hidden px-8 py-3.5 rounded-2xl">
       {/* === LEFT SIDE === */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#F8EACD] flex-col justify-center items-center rounded-xl p-6">
         <div className="max-w-md w-full flex flex-col items-center text-center space-y-4">

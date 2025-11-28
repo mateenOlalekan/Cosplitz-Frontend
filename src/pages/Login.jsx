@@ -55,7 +55,7 @@ export default function Login() {
         initial={{ opacity: 0, x: -60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="hidden lg:flex w-1/2 relative items-center justify-center bg-gray-50"
+        className="hidden md:flex w-1/2 relative items-center justify-center bg-gray-50"
       >
         <img
           src={loginlogo}
@@ -84,7 +84,7 @@ export default function Login() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 py-10 overflow-y-auto"
+        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 py-10 overflow-hidden overflow-y-auto"
       >
         
         {/* Logo */}
