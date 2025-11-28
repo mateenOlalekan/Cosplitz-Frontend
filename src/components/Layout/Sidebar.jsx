@@ -2,7 +2,7 @@
 import { NavLink } from "react-router-dom";
 import {  Home,  Share2,  MessageSquare,  Wallet,  MapPin,  BarChart3,  X,} from "lucide-react";
 import logo from "../../assets/logo.svg";
-import user from "../../assets/image-60.svg";
+import user from "/user.svg";
 
 const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   const handleOverlayClick = () => {
