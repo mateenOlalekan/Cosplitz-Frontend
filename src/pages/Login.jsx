@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { PiAppleLogoBold } from "react-icons/pi";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import loginlogo from "../assets/loginmain.jpg";
 import logo from "../assets/logo.svg";
@@ -22,7 +22,6 @@ const schema = z.object({
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
 
   const {
@@ -37,69 +36,65 @@ export default function Login() {
   // === LOGIN SUBMIT HANDLER ===
   const onSubmit = async (data) => {
     console.log("Form Submitted:", data);
-
-    // Simulate backend login (remove for real API)
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // After successful login → ROUTE TO DASHBOARD
     navigate("/dashboard");
-
     reset();
   };
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-white">
-      
-      {/* === LEFT PANEL === */}
-      <motion.div
-        initial={{ opacity: 0, x: -60 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="hidden md:flex w-1/2 relative items-center justify-center bg-gray-50"
-      >
-        <img
-          src={loginlogo}
-          alt="Illustration"
-          className="w-full object-cover"
-        />
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="absolute bottom-10 mx-6 bg-white/40 backdrop-blur-xl rounded-2xl p-6 max-w-lg shadow-lg text-center"
-        >
-          <h1 className="text-4xl font-semibold text-[#2D0D23] mb-2">
-            Share Expenses & Resources in Real Time
-          </h1>
-          <p className="text-[18px] text-[#4B4B4B] leading-relaxed">
-            Connect with students, travelers, and locals to effortlessly manage
-            costs and resources — anonymously and securely.
-          </p>
-        </motion.div>
-      </motion.div>
+      {/* === LEFT PANEL === */}
+<div className="w-full h-screen hidden lg:block lg:w-1/2">
+  <motion.div
+    initial={{ opacity: 0, x: -60 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.8 }}
+    className="relative flex items-center justify-center bg-gray-50 h-full"
+  >
+    <img
+      src={loginlogo}
+      alt="Illustration"
+      className="w-full h-full object-cover"
+    />
+
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="absolute bottom-10 mx-6 bg-white/40 backdrop-blur-xl rounded-2xl p-6 max-w-lg shadow-lg text-center"
+    >
+      <h1 className="text-4xl font-semibold text-[#2D0D23] mb-2">
+        Share Expenses & Resources in Real Time
+      </h1>
+      <p className="text-[18px] text-[#4B4B4B] leading-relaxed">
+        Connect with students, travelers, and locals to effortlessly manage
+        costs and resources — anonymously and securely.
+      </p>
+    </motion.div>
+  </motion.div>
+</div>
 
       {/* === RIGHT PANEL === */}
       <motion.div
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 py-10 overflow-hidden overflow-y-auto"
+        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 pt-10 overflow-y-auto"
       >
-        
         {/* Logo */}
-        <div className="w-full mb-8 flex justify-start">
+        <div className="w-full mb-8 flex justify-start pb-10">
           <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto select-none pointer-events-none" />
         </div>
 
         {/* Header */}
         <div className="w-full text-center mb-4">
-          <h1 className="text-3xl font-bold text-gray-900">
-            Create Your Account
-          </h1>
-          <p className="text-gray-500 text-sm sm:text-base mt-1">
-            Let’s get started with real-time cost sharing.
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900">Log in to your account</h1>
+          <div className="flex justify-center">
+            <p className="text-gray-500 text-sm sm:text-base mt-3">
+              Welcome back to your peer-peer cost <br /> sharing platform
+            </p>
+          </div>
         </div>
 
         {/* === SOCIAL BUTTONS === */}
@@ -111,7 +106,7 @@ export default function Login() {
           >
             <FcGoogle size={22} />
             <span className="text-gray-700 font-medium text-sm sm:text-base">
-              Sign In with Google
+              Log in with Google
             </span>
           </motion.button>
 
@@ -122,7 +117,7 @@ export default function Login() {
           >
             <PiAppleLogoBold size={22} />
             <span className="text-gray-700 font-medium text-sm sm:text-base">
-              Sign In with Apple
+              Log in with Apple
             </span>
           </motion.button>
         </div>
@@ -139,7 +134,7 @@ export default function Login() {
 
         {/* === FORM === */}
         <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          
+
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -168,7 +163,7 @@ export default function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 {...register("password")}
-                placeholder="Create your password"
+                placeholder="Enter your password"
                 className={`w-full px-3 py-2 border ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 } rounded-lg pr-10 focus:ring-2 focus:ring-green-500 outline-none`}
@@ -184,26 +179,23 @@ export default function Login() {
             </div>
 
             {errors.password && (
-              <p className="text-xs text-red-500 mt-1">
-                {errors.password.message}
-              </p>
+              <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
             )}
           </div>
 
           {/* Terms */}
-          <div className="flex items-start gap-3">
-            <input
-              type="checkbox"
-              {...register("agreeToTerms")}
-              className="mt-1 w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-            />
-            <label className="text-sm text-gray-700 leading-relaxed">
-              I agree to all{" "}
-              <a className="text-green-600 hover:underline">Terms</a>,{" "}
-              <a className="text-green-600 hover:underline">Privacy</a> and{" "}
-              <a className="text-green-600 hover:underline">Fees</a>
-            </label>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                {...register("agreeToTerms")}
+                className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+              />
+              <label className="text-sm text-gray-700">Remember me</label>
+            </div>
+            <span className="text-[#1F8225] cursor-pointer">Forgot Password?</span>
           </div>
+
           {errors.agreeToTerms && (
             <p className="text-xs text-red-500">{errors.agreeToTerms.message}</p>
           )}
@@ -217,21 +209,26 @@ export default function Login() {
               isSubmitting ? "opacity-60 cursor-not-allowed" : "hover:bg-green-700"
             }`}
           >
-            {isSubmitting ? "Processing..." : "Continue"}
+            {isSubmitting ? "Processing..." : "Login"}
           </motion.button>
 
           {/* Footer */}
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-gray-600 mt-2">
             Don't have an account?{" "}
-            <Link to="/register" className="text-green-600 font-medium hover:underline">register</Link>
+            <Link to="/register" className="text-green-600 font-medium hover:underline">
+              Sign Up
+            </Link>
           </p>
 
           <p className="text-center text-sm">
-            <a className="text-green-600 hover:underline">Proceed as Guest</a>
+            <a className="text-green-600 hover:underline cursor-pointer">
+              Proceed as Guest
+            </a>
             <span className="text-gray-400 ml-2">(Limited Features)</span>
           </p>
         </form>
       </motion.div>
+
     </div>
   );
 }
