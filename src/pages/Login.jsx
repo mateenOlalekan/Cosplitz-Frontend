@@ -80,15 +80,15 @@ export default function Login() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 pt-10 overflow-y-auto"
+        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 pt-6 overflow-y-auto"
       >
         {/* Logo */}
-        <div className="w-full mb-8 flex justify-start pb-10">
+        <div className="w-full mb-8 flex justify-start pb-6">
           <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto select-none pointer-events-none" />
         </div>
 
         {/* Header */}
-        <div className="w-full text-center mb-4">
+        <div className="w-full text-center mb-2">
           <h1 className="text-3xl font-bold text-gray-900">Log in to your account</h1>
           <div className="flex justify-center">
             <p className="text-gray-500 text-sm sm:text-base mt-3">
