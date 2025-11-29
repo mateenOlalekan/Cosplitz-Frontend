@@ -11,7 +11,7 @@ import { useNavigate, Link } from "react-router-dom";
 import loginlogo from "../assets/loginmain.jpg";
 import logo from "../assets/logo.svg";
 
-// === ZOD VALIDATION SCHEMA ===
+// === ZOD SCHEMA ===
 const schema = z.object({
   email: z.string().min(1, "Email is required").email("Enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long").max(30),
@@ -33,7 +33,6 @@ export default function Login() {
     resolver: zodResolver(schema),
   });
 
-  // === LOGIN SUBMIT HANDLER ===
   const onSubmit = async (data) => {
     console.log("Form Submitted:", data);
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -42,67 +41,72 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-white">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-white">
 
-      {/* === LEFT PANEL === */}
-<div className="w-full h-screen hidden lg:block lg:w-1/2">
-  <motion.div
-    initial={{ opacity: 0, x: -60 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.8 }}
-    className="relative flex items-center justify-center bg-gray-50 h-full"
-  >
-    <img
-      src={loginlogo}
-      alt="Illustration"
-      className="w-full h-full object-cover"
-    />
+      {/* LEFT IMAGE PANEL (Hidden on mobile) */}
+      <div className="hidden lg:block lg:w-1/2 h-screen">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative flex items-center justify-center bg-gray-50 h-full"
+        >
+          <img
+            src={loginlogo}
+            alt="Illustration"
+            className="w-full h-full object-cover"
+          />
 
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="absolute bottom-10 mx-6 bg-white/40 backdrop-blur-xl rounded-2xl p-6 max-w-lg shadow-lg text-center"
-    >
-      <h1 className="text-4xl font-semibold text-[#2D0D23] mb-2">
-        Share Expenses & Resources in Real Time
-      </h1>
-      <p className="text-[18px] text-[#4B4B4B] leading-relaxed">
-        Connect with students, travelers, and locals to effortlessly manage
-        costs and resources — anonymously and securely.
-      </p>
-    </motion.div>
-  </motion.div>
-</div>
+          {/* Floating text */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute bottom-10 mx-6 bg-white/40 backdrop-blur-xl 
+                       rounded-2xl p-6 max-w-lg shadow-xl text-center"
+          >
+            <h1 className="text-3xl lg:text-4xl font-semibold text-[#2D0D23] mb-2">
+              Share Expenses & Resources in Real Time
+            </h1>
+            <p className="text-base lg:text-[18px] text-[#4B4B4B] leading-relaxed">
+              Connect with students, travelers, and locals to effortlessly manage
+              costs and resources — anonymously and securely.
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
 
-      {/* === RIGHT PANEL === */}
+      {/* RIGHT LOGIN PANEL */}
       <motion.div
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20  overflow-y-auto"
+        className="w-full lg:w-1/2 px-6 sm:px-10 md:px-16 py-8 
+                   flex flex-col justify-center items-center overflow-y-auto"
       >
         {/* Logo */}
-        <div className="w-full mb-8 flex justify-start pb-4">
-          <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto select-none pointer-events-none" />
+        <div className="w-full mb-8 flex justify-start">
+          <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto" />
         </div>
 
         {/* Header */}
-        <div className="w-full text-center mb-2">
-          <h1 className="text-3xl font-bold text-gray-900">Log in to your account</h1>
-          <div className="flex justify-center">
-            <p className="text-gray-500 text-sm sm:text-base mt-3">
-              Welcome back to your peer-peer cost <br /> sharing platform
-            </p>
-          </div>
+        <div className="w-full text-center mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Log in to your account
+          </h1>
+          <p className="text-gray-500 text-sm sm:text-base mt-3 leading-relaxed">
+            Welcome back to your peer-to-peer cost <br className="hidden sm:block" />
+            sharing platform
+          </p>
         </div>
 
-        {/* === SOCIAL BUTTONS === */}
-        <div className="grid grid-cols-1 gap-2 mb-2 w-full">
+        {/* SOCIAL BUTTONS */}
+        <div className="grid grid-cols-1 gap-3 mb-4 w-full">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full flex items-center justify-center gap-3 px-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 
+                       border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             <FcGoogle size={22} />
             <span className="text-gray-700 font-medium text-sm sm:text-base">
@@ -113,7 +117,8 @@ export default function Login() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full flex items-center justify-center gap-3 px-3 py-3 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 
+                       border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             <PiAppleLogoBold size={22} />
             <span className="text-gray-700 font-medium text-sm sm:text-base">
@@ -123,7 +128,7 @@ export default function Login() {
         </div>
 
         {/* Divider */}
-        <div className="relative w-full my-2">
+        <div className="relative w-full my-3">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
@@ -132,9 +137,8 @@ export default function Login() {
           </div>
         </div>
 
-        {/* === FORM === */}
-        <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
-
+        {/* FORM */}
+        <form className="w-full space-y-3" onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -154,7 +158,7 @@ export default function Login() {
           </div>
 
           {/* Password */}
-          <div className="relative">
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Password <span className="text-red-500">*</span>
             </label>
@@ -183,7 +187,7 @@ export default function Login() {
             )}
           </div>
 
-          {/* Terms */}
+          {/* Remember + Forgot */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <input
@@ -193,42 +197,49 @@ export default function Login() {
               />
               <label className="text-sm text-gray-700">Remember me</label>
             </div>
-            <span className="text-[#1F8225] cursor-pointer">Forgot Password?</span>
+            <span className="text-green-600 text-sm cursor-pointer">
+              Forgot Password?
+            </span>
           </div>
 
+          {/* Terms error */}
           {errors.agreeToTerms && (
             <p className="text-xs text-red-500">{errors.agreeToTerms.message}</p>
           )}
 
-          {/* Submit */}
+          {/* SUBMIT */}
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             disabled={isSubmitting}
-            className={`w-full bg-green-600 text-white py-3 rounded-lg font-semibold transition ${
-              isSubmitting ? "opacity-60 cursor-not-allowed" : "hover:bg-green-700"
-            }`}
+            className={`w-full bg-green-600 text-white py-3 rounded-lg 
+                font-semibold transition ${
+                  isSubmitting ? "opacity-60 cursor-not-allowed" : "hover:bg-green-700"
+                }`}
           >
             {isSubmitting ? "Processing..." : "Login"}
           </motion.button>
 
-          {/* Footer */}
-          <p className="text-center text-sm text-gray-600 mt-2">
-            Don't have an account?{" "}
-            <Link to="/register" className="text-green-600 font-medium hover:underline">
+          {/* Sign Up */}
+          <p className="text-center text-sm text-gray-600 mt-1">
+            Don’t have an account?{" "}
+            <Link
+              to="/register"
+              className="text-green-600 font-medium hover:underline"
+            >
               Sign Up
             </Link>
           </p>
 
+          {/* Guest */}
           <p className="text-center text-sm">
             <a className="text-green-600 hover:underline cursor-pointer">
               Proceed as Guest
             </a>
-            <span className="text-gray-400 ml-2">(Limited Features)</span>
+            <span className="text-gray-400 ml-1">(Limited Features)</span>
           </p>
         </form>
       </motion.div>
-
     </div>
   );
 }
