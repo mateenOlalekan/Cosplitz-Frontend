@@ -2,9 +2,9 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import "./App.css";
 
-const SplashLogo = lazy(() => import ("./components/Loading"))
+const SplashLogo = lazy(() => import("./components/Loading"));
 
-// Lazy-loaded pages
+// Public pages
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
@@ -30,12 +30,9 @@ const Wallet = lazy(() => import("./pages/Dashboard/Wallet"));
 const CreateSplitzPage = lazy(() => import("./pages/Dashboard/CreateSplitz"));
 const NotificationPage = lazy(() => import("./pages/Dashboard/Notification"));
 
-// Loading Screen
-
-
 export default function App() {
   return (
-    <Suspense fallback={<SplashLogo/>}>
+    <Suspense fallback={<SplashLogo />}>
       <Routes>
 
         {/* Public Routes */}
@@ -54,7 +51,7 @@ export default function App() {
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="/password-reset-success" element={<PasswordResetSuccess />} />
 
-        {/* Dashboard Routes */}
+        {/* Dashboard (Protected Later) */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="analytics" element={<Analytics />} />
@@ -63,7 +60,7 @@ export default function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="notification" element={<NotificationPage />} />
 
-          {/* Nested Settings */}
+          {/* Settings */}
           <Route path="settings" element={<SettingsLayout />}>
             <Route index element={<MyProfile />} />
             <Route path="profile" element={<MyProfile />} />
