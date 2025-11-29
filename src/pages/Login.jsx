@@ -80,7 +80,7 @@ export default function Login() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 pt-5 overflow-y-auto"
+        className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20  overflow-y-auto"
       >
         {/* Logo */}
         <div className="w-full mb-8 flex justify-start pb-4">
