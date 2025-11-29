@@ -15,7 +15,7 @@ export default function Footer() {
               <img 
                 src={logo} 
                 alt="Cosplitz Logo" 
-                className="w-48 h-auto object-cover"
+                className="h-10 md:h-12 w-auto select-none pointer-events-none"
               />
               <p className="text-2xl font-light text-gray-700 leading-tight">
                 Split Smarter, Spend Together

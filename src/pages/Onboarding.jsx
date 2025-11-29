@@ -36,7 +36,7 @@ export default function Onboarding() {
 
   const handleNext = () => {
     if (step < pages.length) setStep(step + 1);
-    else navigate("/signup");
+    else navigate("/register");
   };
 
   const handleBack = () => {
