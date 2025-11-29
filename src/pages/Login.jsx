@@ -83,7 +83,7 @@ export default function Login() {
         className="flex w-full lg:w-1/2 flex-col justify-center items-center px-6 sm:px-10 md:px-20 pt-5 overflow-y-auto"
       >
         {/* Logo */}
-        <div className="w-full mb-8 flex justify-start pb-5">
+        <div className="w-full mb-8 flex justify-start pb-4">
           <img src={logo} alt="Logo" className="h-10 md:h-12 w-auto select-none pointer-events-none" />
         </div>
 
@@ -123,7 +123,7 @@ export default function Login() {
         </div>
 
         {/* Divider */}
-        <div className="relative w-full mb-4">
+        <div className="relative w-full my-2">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
@@ -133,7 +133,7 @@ export default function Login() {
         </div>
 
         {/* === FORM === */}
-        <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="w-full space-y-2" onSubmit={handleSubmit(onSubmit)}>
 
           {/* Email */}
           <div>
