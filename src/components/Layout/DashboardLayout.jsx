@@ -34,7 +34,7 @@ export default function DashboardLayout() {
         />
 
         {/* Outlet renders nested dashboard pages */}
-        <main className="flex-1 overflow-y-auto px-3 py-2 bg-slate-100">
+        <main className="flex-1 overflow-y-auto  pl-5 pt-4 bg-slate-100">
           <Outlet />
         </main>
       </div>

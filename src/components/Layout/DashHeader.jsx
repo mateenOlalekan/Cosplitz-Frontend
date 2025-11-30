@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"; // ✅ Fixed import
 function Header({ setSidebarOpen, sidebarOpen, isMobile }) {
   return (
     <header className="sticky top-0 bg-white border-b border-gray-200 z-30">
-      <div className="px-4 py-3 flex items-center justify-between">
+      <div className="p-4 flex items-center justify-between">
         {/* === Left Section === */}
         <div className="flex items-center gap-3 flex-1">
           {/* Sidebar Toggle Button */}
@@ -51,7 +51,7 @@ function Header({ setSidebarOpen, sidebarOpen, isMobile }) {
       </div>
 
       {/* Location Info */}
-      <div className="pl-6 py-3 p text-sm text-gray-600">
+      <div className="px-6 pb-3 text-sm text-gray-600">
         Ikeja, Lagos, Nigeria
       </div>
     </header>

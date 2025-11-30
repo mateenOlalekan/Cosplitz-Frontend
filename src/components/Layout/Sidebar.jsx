@@ -10,8 +10,8 @@ const Sidebar = ({ sidebarOpen, isMobile, setSidebarOpen }) => {
   };
 
   const navItems = [
-    { icon: Home, label: "Overview", url: "/dashboard" },
-    { icon: Share2, label: "My Splittz", url: "/dashboard/create-split", count: 3 },
+    { icon: Home, label: "Home", url: "/dashboard" },
+    { icon: Share2, label: "My Splitz", url: "/dashboard/create-split", count: 3 },
     { icon: MessageSquare, label: "Messages", url: "/dashboard/messages", count: 8 },
     { icon: Wallet, label: "Wallet", url: "/dashboard/payment" },
     { icon: MapPin, label: "Nearby", url: "/dashboard/nearby", count: 12 },

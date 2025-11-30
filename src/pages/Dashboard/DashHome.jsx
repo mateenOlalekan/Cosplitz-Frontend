@@ -1,26 +1,10 @@
 import { useState } from "react";
-import {
-  Menu,
-  Bell,
-  Settings,
-  Heart,
-  Share2, // ✅ changed to Share2 (from lucide-react)
-  Users,
-  Clock,
-  MapPin,
-  Users2,
-} from "lucide-react";
-
+import {  Heart,Share2, Users,Clock, MapPin,  Users2,} from "lucide-react";
 import Overlay1 from "../../assets/Overlay.svg";
 import Overlay2 from "../../assets/Overlay1.svg";
 import Overlay3 from "../../assets/Overlay2.svg";
 import Overlay4 from "../../assets/Overlay3.svg";
-
-import ticket from "../../assets/ticket.jpg";
-import shop from "../../assets/shop.jpg";
-import car from "../../assets/car.jpg";
-import pizza from "../../assets/pizza.jpg";
-
+import {splits,deals} from "../../Data/Alldata"
 const Main = ({ sidebarOpen = false, isMobile = false, setSidebarOpen = () => {} }) => {
   const [activeTab, setActiveTab] = useState("All Active");
   const [activeSlide, setActiveSlide] = useState(0);
@@ -32,100 +16,7 @@ const Main = ({ sidebarOpen = false, isMobile = false, setSidebarOpen = () => {}
     { icon: Overlay4, label: "Crowdfund" },
   ];
 
-  const splits = [
-    {
-      id: 1,
-      title: "Concert Ticket Group",
-      price: "₦1000",
-      participants: "2/3",
-      timeLeft: "2 days left",
-      distance: "1.2 km",
-      creator: "Ade O.",
-      image: ticket,
-      badge: "Event",
-      desc: "Music & Fun",
-      descbg: "#65CADF33",
-      desctext: "#65CADF",
-    },
-    {
-      id: 2,
-      title: "Shared Taxi to Campus",
-      price: "₦2000",
-      participants: "3/5",
-      timeLeft: "15 min left",
-      distance: "0.8 km",
-      creator: "Jane D.",
-      image: car,
-      badge: "Ride",
-      desc: "Transport",
-      descbg: "#FB985133",
-      desctext: "#FB9851",
-    },
-    {
-      id: 3,
-      title: "Bulk Groceries Order",
-      price: "₦500",
-      participants: "2/4",
-      timeLeft: "3h left",
-      distance: "1.2 km",
-      creator: "Jones R.",
-      image: shop,
-      badge: "Food",
-      desc: "Groceries",
-      descbg: "#65CADF33",
-      desctext: "#65CADF",
-    },
-    {
-      id: 4,
-      title: "Pizza Party Splittz",
-      price: "₦1500",
-      participants: "2/8",
-      timeLeft: "45 min left",
-      distance: "1.2 km",
-      creator: "Sara K.",
-      image: pizza,
-      badge: "Food",
-      desc: "Snacks",
-      descbg: "#65CADF33",
-      desctext: "#65CADF",
-    },
-  ];
 
-  const deals = [
-    {
-      badge: "Limited Deal",
-      discount: "40% Off",
-      title: "Get Special Offer",
-      description: "Flash Sale: Shared Taxi",
-      details: "All Services Available / T & C Applied",
-      time: "15 min left!",
-      image: car,
-      participants: "3/5 Participants",
-      color: "from-[#065026] via-[#0F8542] to-[#065026]",
-    },
-    {
-      badge: "Popular",
-      discount: "30% Off",
-      title: "Bulk Grocery Deal",
-      description: "Flash Sale: Save on Group Orders",
-      details: "Fresh Produce / Same Day Delivery",
-      time: "30 min left!",
-      image: shop,
-      participants: "7/10 Participants",
-      color: "from-[#065026] via-[#0F8542] to-[#065026]",
-    },
-    {
-      badge: "Newest",
-      discount: "20% Off",
-      title: "Concert Deal",
-      description: "Flash Sale: Shared Taxi",
-      details: "Fresh Produce / Same Day Delivery",
-      time: "30 min left!",
-      image: ticket,
-      participants: "7/10 Participants",
-      color: "from-[#065026] via-[#0F8542] to-[#065026]",
-    },
-  ];
 
   return (
     <div className="w-full min-h-screen transition-all duration-300">
@@ -228,7 +119,7 @@ const Main = ({ sidebarOpen = false, isMobile = false, setSidebarOpen = () => {}
               </button>
             ))}
           </div>
-
+<div className="flex justify-between "></div>
           {/* Splittz Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
             {splits.map((split) => (
@@ -250,18 +141,23 @@ const Main = ({ sidebarOpen = false, isMobile = false, setSidebarOpen = () => {}
 
                   {/* 🩷 Heart + 🔗 Share icons */}
                   <div className="absolute top-2 right-2 flex gap-2">
-                    <button className="bg-white/80 backdrop-blur-sm p-1.5 rounded-full hover:bg-white transition">
-                      <Heart size={16} className="text-red-500" />
+                    <button className="bg-black backdrop-blur-sm p-1.5 rounded-full hover:bg-white transition">
+                      <Heart size={16} className="text-white" />
                     </button>
-                    <button className="bg-white/80 backdrop-blur-sm p-1.5 rounded-full hover:bg-white transition">
-                      <Share2 size={16} className="text-gray-700" />
+                    <button className="bg-black backdrop-blur-sm p-1.5 rounded-full hover:bg-white transition">
+                      <Share2 size={16} className="text-white" />
                     </button>
                   </div>
                 </div>
-
+                <div className="flex justify-between items-center">
                 <h3 className="text-sm font-semibold text-gray-900 mb-1">
                   {split.title}
                 </h3>
+                <div className={`${split.bgtext}`}>
+                  {split.name}
+                </div>
+                </div>
+
                 <p className="text-xs text-gray-500 mb-2">
                   <MapPin className="inline-block w-3 h-3 mr-1" />
                   {split.distance} away

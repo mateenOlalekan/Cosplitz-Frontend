@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { useState } from "react";
 import loginlogo from "../assets/loginmain.jpg";
 import logo from "../assets/newlogo.svg";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +7,19 @@ import { useNavigate } from "react-router-dom";
 export default function PasswordResetSuccess() {
   const navigate = useNavigate();
 
+  // Added missing field + state
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const field = "email";
+
   const handleGoToLogin = () => {
     navigate("/login");
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-white/40 overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-screen bg-[#F7F5F9] overflow-hidden md:px-6 md:py-4 rounded-2xl">
       {/* === LEFT PANEL === */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -46,7 +53,7 @@ export default function PasswordResetSuccess() {
         initial={{ opacity: 0, x: 60 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex w-full lg:w-1/2 flex-col justify-between items-center bg-white overflow-y-auto px-4 sm:px-8 md:px-16 lg:px-20 py-8"
+        className="flex w-full h-screen lg:w-1/2 flex-col justify-between items-center bg-white overflow-y-auto px-4 sm:px-6 md:px-8 lg:px-10 py-8"
       >
         {/* === LOGO === */}
         <div className="w-full flex justify-start mb-6">
@@ -60,34 +67,66 @@ export default function PasswordResetSuccess() {
           />
         </div>
 
-        {/* === SUCCESS CONTENT === */}
+        {/* === FORM CONTENT === */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="flex flex-col justify-center items-center text-center space-y-8 w-full max-w-lg"
+          className="flex flex-col justify-center items-center text-center space-y-8 w-full max-w-3xl"
         >
-          <CheckCircle className="text-green-600 w-20 h-20 sm:w-24 sm:h-24" />
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
-            Congratulations
+          <h1 className="text-3xl sm:text-4xl md:text-5px font-semibold text-gray-900">
+            Forgot your password?
           </h1>
-          <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md">
-            Your password has been successfully updated. Please log in again
-            using your latest credentials.
+
+          <p className="text-[#67707E] text-center text-base sm:text-lg leading-relaxed max-w-lg">
+            Please enter your recovery email / phone number and follow the steps
+            to complete.
           </p>
 
+          {/* === INPUT FIELD === */}
+          <div className="flex flex-col w-full text-start  max-w-lg">
+            <label className="text-sm font-medium text-gray-700 mb-1">
+              Email Address <span className="text-red-500">*</span>
+            </label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              name="email"
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+            />
+          </div>
+
+          {/* === REMEMBER PASSWORD === */}
+          <div className="flex flex-col w-full max-w-lg text-left">
+            <div className="text-[#67707E] text-sm">
+              Remember password?{" "}
+              <span
+                className="text-[#1F8225] font-medium cursor-pointer"
+                onClick={handleGoToLogin}
+              >
+                Log In
+              </span>
+            </div>
           {/* === BUTTON === */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            onClick={handleGoToLogin}
-            className="mt-4 w-full border-2 border-green-500 bg-green-600 text-white rounded-2xl py-3 font-medium hover:bg-green-700 transition duration-300"
+            className="mt-4 w-full max-w-lg border-2 border-[#1F8225]  text-[#1F8225] rounded-2xl py-3 font-medium  transition duration-300"
           >
-            Login
+            Send Code
           </motion.button>
+          
+          </div>
+
+
         </motion.div>
 
-        <p>feffefe</p>
+        <p className="text-gray-400 text-xs mt-6"></p>
       </motion.div>
     </div>
   );

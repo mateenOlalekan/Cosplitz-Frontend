@@ -27,7 +27,7 @@ export default function WaveBackground() {
 
       <section
         id="home"
-        className="relative w-full  pt-20 md:pt-16  bg-white overflow-hidden"
+        className="relative w-full  pt-24 md:pt-24 bg-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4  h-full">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-10 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
@@ -37,7 +37,7 @@ export default function WaveBackground() {
               className="w-full md:w-1/2 space-y-3 md:space-y-4 flex flex-col justify-center"
               data-aos="fade-right"
             >
-              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-6xl  font-bold text-gray-900 leading-tight tracking-tight">
+              <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl  font-bold text-gray-900 leading-tight tracking-tight">
                 Split Smarter,
                 <br/>
                 Spend Together
@@ -68,7 +68,7 @@ export default function WaveBackground() {
               data-aos="fade-left"
               data-aos-delay="200"
             >
-              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-2xl">
+              <div className="relative w-full max-w-sm pt sm:max-w-sm md:max-w-lg lg:max-w-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1F8225]/10 to-transparent rounded-2xl blur-2xl -z-10" />
                 <img
                   src={Hero}
@@ -82,7 +82,7 @@ export default function WaveBackground() {
 
               {/* ====== Buttons ====== */}
               <div
-                className="hidden max-md:flex  sm:flex-row gap-4 pt-10 md:pt-6 w-full sm:w-auto"
+                className="hidden max-md:flex  sm:flex-row gap-4 py-10 md:pt-6 w-full sm:w-auto"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
