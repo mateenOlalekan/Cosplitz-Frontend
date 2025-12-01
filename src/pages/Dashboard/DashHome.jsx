@@ -104,16 +104,29 @@ const Main = ({ sidebarOpen = false, isMobile = false, setSidebarOpen = () => {}
         </section>
 
         {/* 🟦 Create Splittz Banner */}
-        <div className="w-full bg-gradient-to-r from-[#096A0F] to-[#1F8225] px-4 py-6 rounded-lg flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-          <div className="flex flex-col text-white">
-            <h1 className="text-xl font-semibold">Have something to share?</h1>
-            <p className="text-sm opacity-90">Start a splitz and find partners</p>
-          </div>
+<div className="w-full bg-gradient-to-r from-[#096A0F] to-[#1F8225] px-4 py-6 rounded-lg 
+    flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
 
-          <button onClick={CreateSplitz}  className="bg-white text-[#096A0F] w-20 md:w-40 py-3 rounded-sm text-base font-medium shadow self-start sm:self-auto">
-            Create Splitz
-          </button>
-        </div>
+  {/* Text Section */}
+  <div className="flex flex-col text-white">
+    <h1 className="text-xl md:text-2xl font-semibold">
+      Have something to share?
+    </h1>
+    <p className="text-sm md:text-base opacity-90">
+      Start a splitz and find partners
+    </p>
+  </div>
+
+  {/* Button */}
+  <button
+    onClick={CreateSplitz}
+    className="bg-white text-[#096A0F] w-full sm:w-32 md:w-40 py-3 rounded-md 
+           text-base font-medium shadow sm:self-auto"
+  >
+    Create Splitz
+  </button>
+</div>
+
 
         {/* 🟥 Active Splittz */}
         <section>
