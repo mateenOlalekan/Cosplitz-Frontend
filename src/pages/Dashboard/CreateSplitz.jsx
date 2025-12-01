@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import {  ChevronLeft,  Camera,  Calendar,  Clock,  AlertCircle,  Shield} from 'lucide-react';
+import { ChevronLeft, Camera, Calendar, Clock, AlertCircle, Shield } from 'lucide-react';
+import {useNavigate} from "react-router-dom";
 
 const CreateSplitzPage = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [formData, setFormData] = useState({
     splitTitle: '',
     category: '',
@@ -20,22 +20,7 @@ const CreateSplitzPage = () => {
   });
 
   const [imageFile, setImageFile] = useState(null);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImageFile(URL.createObjectURL(file));
-    }
-  };
-
-  const handleCostMethodChange = (method) => {
-    setFormData(prev => ({ ...prev, costMethod: method }));
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const categories = [
     'Select Category',
@@ -47,285 +32,315 @@ const CreateSplitzPage = () => {
     'Other'
   ];
 
+const navigate = useNavigate();
+
+const gotoCreateSplitz = () =>{
+  navigate("/dashboard/payment")
+}
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) setImageFile(URL.createObjectURL(file));
+  };
+
+  const handleCostMethodChange = (method) => {
+    setFormData(prev => ({ ...prev, costMethod: method }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      console.log('Form submitted:', formData);
+      alert('Splitz created successfully!');
+      setIsSubmitting(false);
+    }, 1500);
+  };
+
   return (
-    <div className="min-h-screen">
-      <main className="p-4 bg-white max-w-4xl mx-auto rounded-xl">
+    <div className="min-h-screen bg-white px-3 sm:px-6 lg:px-8 py-6">
+      <main className="max-w-3xl mx-auto space-y-6">
 
-
-        {/* Form Sections */}
-        <div className="space-y-3">
-
-          {/* What are you splitting */}
-          <section className="bg-white rounded-xl p-6 shadow-sm">
-<div className="w-full flex justify-between items-center">
-  <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium">
-    <ChevronLeft size={20} />
-    Back
-  </button>
-
-  <h1 className="text-3xl font-bold text-gray-900 my-2">Create Splittz</h1>
-
-  <p className="opacity-0">placeholder</p>
-</div>
-
-
-
-            <h2 className="text-lg text-center font-semibold text-gray-900 mb-2">What are you splitting?</h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Split Title</label>
-                <input
-                  type="text"
-                  name="splitTitle"
-                  placeholder="e.g. Shared Costco Groceries"
-                  value={formData.splitTitle}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Split Type/Category</label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none bg-white"
-                >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Image/Photo (Optional)</label>
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center gap-4 hover:border-green-500 transition cursor-pointer">
-                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <Camera size={20} className="text-gray-400" />
-                  </div>
-                  <label className="flex-1 cursor-pointer">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileUpload}
-                      className="hidden"
-                    />
-                    <span className="text-green-600 font-medium">Choose File</span>
-                  </label>
-                </div>
-                {imageFile && <img src={imageFile} alt="Preview" className="mt-3 h-24 rounded-lg" />}
-              </div>
-            </div>
-          </section>
-
-          {/* Cost and Participants */}
-          <section className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Cost and Participants</h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Total Amount</label>
-                <input
-                  type="text"
-                  name="totalAmount"
-                  value={formData.totalAmount}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Participants Needed (excluding you)</label>
-                <input
-                  type="number"
-                  name="participants"
-                  value={formData.participants}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              {/* Cost Method */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">Cost Sharing Method</label>
-                <div className="space-y-3">
-                  <button
-                    onClick={() => handleCostMethodChange('equal')}
-                    type="button"
-                    className={`w-full p-3 border-2 rounded-lg text-left transition ${formData.costMethod === 'equal' ? 'border-green-600 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className={`w-4 h-4 rounded-full border-2 ${formData.costMethod === 'equal' ? 'bg-green-600 border-green-600' : 'border-gray-400'}`} />
-                      <span className="font-medium text-gray-900">Equal Split</span>
-                    </div>
-                    <p className="text-xs text-gray-600 ml-6">All participants pay the same amount.</p>
-                  </button>
-
-                  <button
-                    onClick={() => handleCostMethodChange('custom')}
-                    type="button"
-                    className={`w-full p-3 border-2 rounded-lg text-left transition ${formData.costMethod === 'custom' ? 'border-green-600 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className={`w-4 h-4 rounded-full border-2 ${formData.costMethod === 'custom' ? 'bg-green-600 border-green-600' : 'border-gray-400'}`} />
-                      <span className="font-medium text-gray-900">Custom Split</span>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                <input
-                  type="checkbox"
-                  checked={formData.includeMe}
-                  onChange={(e) => setFormData(prev => ({ ...prev, includeMe: e.target.checked }))}
-                  className="w-4 h-4 accent-green-600 rounded cursor-pointer"
-                />
-                <label className="text-sm font-medium text-gray-700 cursor-pointer">I want to be part of the split</label>
-              </div>
-            </div>
-          </section>
-
-          {/* Start & End Period */}
-          <section className="bg-white rounded-xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Start & End Period</h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Calendar size={16} /> Start Date
-                </label>
-                <input
-                  type="date"
-                  value={formData.startDate}
-                  onChange={(e) => setFormData(prev => ({ ...prev, startDate: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Clock size={16} /> Start Time
-                </label>
-                <input
-                  type="time"
-                  value={formData.startTime}
-                  onChange={(e) => setFormData(prev => ({ ...prev, startTime: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Calendar size={16} /> End Date
-                </label>
-                <input
-                  type="date"
-                  value={formData.endDate}
-                  onChange={(e) => setFormData(prev => ({ ...prev, endDate: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                  <Clock size={16} /> End Time
-                </label>
-                <input
-                  type="time"
-                  value={formData.endTime}
-                  onChange={(e) => setFormData(prev => ({ ...prev, endTime: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-            </div>
-          </section>
-
-          {/* Location */}
-          <section className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Location and Timing</h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Split Location</label>
-                <input
-                  type="text"
-                  value={formData.location}
-                  onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  placeholder="Computer Village, Ikeja, Lagos"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">Visibility Radius: {formData.visibility} km</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  value={formData.visibility}
-                  onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value }))}
-                  className="w-full h-2 bg-[#E4E4E4] rounded-lg cursor-pointer accent-green-600"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    id="repeat"
-                    className="w-4 h-4 accent-green-600 rounded cursor-pointer"
-                  />
-                  <label htmlFor="repeat" className="text-sm font-medium text-gray-700 cursor-pointer">Repeat Split</label>
-                </div>
-                <div className="flex gap-2">
-                  {['Weekly', 'Monthly'].map(freq => (
-                    <button
-                      key={freq}
-                      onClick={() => setFormData(prev => ({ ...prev, recurrence: freq }))}
-                      type="button"
-                      className={`px-4 py-2 rounded-lg font-medium text-sm transition ${formData.recurrence === freq ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-                    >
-                      {freq}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Rules and Safety */}
-          <section className="bg-white rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Rules and Safety</h2>
-
-            <div className="space-y-3">
-              <div className="p-4 border-l-4 border-red-500 bg-red-50 rounded flex items-start gap-3">
-                <AlertCircle size={20} className="text-red-600 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-red-700 text-sm mb-1">Mandatory Refund Rule</h4>
-                  <p className="text-sm text-red-600">A 5% charge applies if the split is canceled before 70% participation.</p>
-                </div>
-              </div>
-
-              <div className="p-4 border-l-4 border-green-600 bg-green-50 rounded flex items-start gap-3">
-                <Shield size={20} className="text-green-600 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-green-700 text-sm">Secure Payment Protection</h4>
-                  <p className="text-xs text-green-600">Always active for verified users.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <button className="w-full py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition">
-            Create Splittz
+        {/* Header */}
+        <div className="flex justify-between items-center mb-4">
+          <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium text-sm sm:text-base">
+            <ChevronLeft size={18} /> <span className="hidden sm:inline">Back</span>
           </button>
+          <h1 onClick={gotoCreateSplitz} className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 text-center flex-1">
+            Create Splittz
+          </h1>
+          <div className="w-6 sm:w-8 md:w-10" />
         </div>
+
+        {/* Section: What are you splitting */}
+        <SectionWrapper>
+          <SectionTitle title="What are you splitting?" subtitle="" center />
+          <InputField
+            label="Split Title"
+            placeholder="e.g. Shared Costco Groceries"
+            name="splitTitle"
+            value={formData.splitTitle}
+            onChange={handleInputChange}
+          />
+          <SelectField
+            label="Split Type/Category"
+            name="category"
+            value={formData.category}
+            onChange={handleInputChange}
+            options={categories}
+          />
+          <FileUpload
+            imageFile={imageFile}
+            handleFileUpload={handleFileUpload}
+          />
+        </SectionWrapper>
+
+        {/* Section: Cost & Participants */}
+        <SectionWrapper>
+          <SectionTitle title="Cost and Participants" />
+          <InputField
+            label="Total Amount"
+            name="totalAmount"
+            value={formData.totalAmount}
+            onChange={handleInputChange}
+          />
+          <InputField
+            label="Participants Needed (excluding you)"
+            type="number"
+            name="participants"
+            value={formData.participants}
+            onChange={handleInputChange}
+          />
+          <CostMethodField
+            costMethod={formData.costMethod}
+            handleCostMethodChange={handleCostMethodChange}
+          />
+          <CheckboxField
+            label="I want to be part of the split"
+            checked={formData.includeMe}
+            onChange={(e) => setFormData(prev => ({ ...prev, includeMe: e.target.checked }))}
+          />
+        </SectionWrapper>
+
+        {/* Section: Start & End Period */}
+        <SectionWrapper>
+          <SectionTitle title="Start & End Period" />
+          <DateTimeGrid
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </SectionWrapper>
+
+        {/* Section: Location & Visibility */}
+        <SectionWrapper>
+          <SectionTitle title="Location and Timing" />
+          <InputField
+            label="Split Location"
+            name="location"
+            value={formData.location}
+            onChange={handleInputChange}
+            placeholder="Computer Village, Ikeja, Lagos"
+          />
+          <RangeField
+            label={`Visibility Radius: ${formData.visibility} km`}
+            min={0} max={10}
+            value={formData.visibility}
+            onChange={(e) => setFormData(prev => ({ ...prev, visibility: e.target.value }))}
+          />
+          <RecurrenceField
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </SectionWrapper>
+
+        {/* Section: Rules & Safety */}
+        <SectionWrapper>
+          <SectionTitle title="Rules and Safety" />
+          <RuleItem
+            icon={<AlertCircle size={18} className="text-red-600 mt-0.5" />}
+            title="Mandatory Refund Rule"
+            description="A 5% charge applies if the split is canceled before 70% participation."
+            color="red"
+          />
+          <RuleItem
+            icon={<Shield size={18} className="text-green-600 mt-0.5" />}
+            title="Secure Payment Protection"
+            description="Always active for verified users."
+            color="green"
+          />
+        </SectionWrapper>
+
+        {/* Submit Button */}
+        <button
+          onClick={handleSubmit && gotoCreateSplitz}
+          disabled={isSubmitting}
+          className="w-full py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-70 disabled:cursor-not-allowed text-sm sm:text-base"
+        >
+          {isSubmitting ? 'Creating Splittz...' : 'Create Splittz'}
+        </button>
+
       </main>
     </div>
   );
 };
+
+/* ================= Helper Components ================= */
+
+const SectionWrapper = ({ children }) => (
+  <section className="p-4 sm:p-6 rounded-xl shadow-sm bg-white space-y-4 sm:space-y-6">
+    {children}
+  </section>
+);
+
+const SectionTitle = ({ title, subtitle, center }) => (
+  <div className={`mb-3 sm:mb-4 ${center ? 'text-center' : ''}`}>
+    <h2 className="text-base sm:text-lg font-semibold text-gray-900">{title}</h2>
+    {subtitle && <p className="text-sm text-gray-600">{subtitle}</p>}
+  </div>
+);
+
+const InputField = ({ label, type='text', name, value, onChange, placeholder }) => (
+  <div>
+    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">{label}</label>
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+    />
+  </div>
+);
+
+const SelectField = ({ label, name, value, onChange, options }) => (
+  <div>
+    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">{label}</label>
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none bg-white"
+    >
+      {options.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
+);
+
+const FileUpload = ({ imageFile, handleFileUpload }) => (
+  <div>
+    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">Image/Photo (Optional)</label>
+    <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 hover:border-green-500 transition cursor-pointer">
+      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+        <Camera size={18} className="sm:w-5 sm:h-5 text-gray-400" />
+      </div>
+      <label className="flex-1 w-full cursor-pointer">
+        <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" />
+        <div className="text-center sm:text-left">
+          <span className="text-green-600 font-medium text-sm sm:text-base">Choose File</span>
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">PNG, JPG, GIF up to 10MB</p>
+        </div>
+      </label>
+    </div>
+    {imageFile && (
+      <img src={imageFile} alt="Preview" className="mt-3 h-20 sm:h-24 w-full object-cover rounded-lg" />
+    )}
+  </div>
+);
+
+const CostMethodField = ({ costMethod, handleCostMethodChange }) => (
+  <div className="space-y-2 sm:space-y-3">
+    {['equal', 'custom'].map(method => (
+      <button
+        key={method}
+        onClick={() => handleCostMethodChange(method)}
+        type="button"
+        className={`w-full p-3 border-2 rounded-lg text-left transition ${costMethod === method ? 'border-green-600 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
+      >
+        <div className="flex items-center gap-2 mb-1">
+          <div className={`w-4 h-4 rounded-full border-2 ${costMethod === method ? 'bg-green-600 border-green-600' : 'border-gray-400'}`} />
+          <span className="font-medium text-gray-900 text-sm sm:text-base">{method === 'equal' ? 'Equal Split' : 'Custom Split'}</span>
+        </div>
+        {method === 'equal' && <p className="text-xs text-gray-600 ml-6">All participants pay the same amount.</p>}
+      </button>
+    ))}
+  </div>
+);
+
+const CheckboxField = ({ label, checked, onChange }) => (
+  <div className="flex items-center gap-2 sm:gap-3 p-3 bg-green-50 rounded-lg">
+    <input type="checkbox" checked={checked} onChange={onChange} className="w-4 h-4 accent-green-600 rounded cursor-pointer" />
+    <label className="text-xs sm:text-sm font-medium text-gray-700 cursor-pointer">{label}</label>
+  </div>
+);
+
+const DateTimeGrid = ({ formData, setFormData }) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+    {[
+      { label: 'Start Date', type: 'date', name: 'startDate', Icon: Calendar },
+      { label: 'Start Time', type: 'time', name: 'startTime', Icon: Clock },
+      { label: 'End Date', type: 'date', name: 'endDate', Icon: Calendar },
+      { label: 'End Time', type: 'time', name: 'endTime', Icon: Clock }
+    ].map(field => (
+      <div key={field.name}>
+        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2 flex items-center gap-2">
+          <field.Icon size={14} className="sm:w-4 sm:h-4" /> {field.label}
+        </label>
+        <input
+          type={field.type}
+          value={formData[field.name]}
+          onChange={(e) => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
+          className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+        />
+      </div>
+    ))}
+  </div>
+);
+
+const RangeField = ({ label, min, max, value, onChange }) => (
+  <div>
+    <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">{label}</label>
+    <input
+      type="range"
+      min={min} max={max}
+      value={value}
+      onChange={onChange}
+      className="w-full h-2 bg-[#E4E4E4] rounded-lg cursor-pointer accent-green-600"
+    />
+  </div>
+);
+
+const RecurrenceField = ({ formData, setFormData }) => (
+  <div className="space-y-2 sm:space-y-3">
+    <div className="flex flex-wrap gap-2">
+      {['Weekly', 'Monthly'].map(freq => (
+        <button
+          key={freq}
+          onClick={() => setFormData(prev => ({ ...prev, recurrence: freq }))}
+          type="button"
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition ${formData.recurrence === freq ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+        >
+          {freq}
+        </button>
+      ))}
+    </div>
+  </div>
+);
+
+const RuleItem = ({ icon, title, description, color }) => (
+  <div className={`p-3 sm:p-4 border-l-4 ${color === 'red' ? 'border-red-500 bg-red-50' : 'border-green-600 bg-green-50'} rounded flex items-start gap-2 sm:gap-3`}>
+    {icon}
+    <div>
+      <h4 className={`font-semibold text-${color}-700 text-xs sm:text-sm mb-1`}>{title}</h4>
+      <p className={`text-xs text-${color}-600`}>{description}</p>
+    </div>
+  </div>
+);
 
 export default CreateSplitzPage;

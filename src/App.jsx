@@ -2,9 +2,10 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import "./App.css";
 
+// Loading / Splash
 const SplashLogo = lazy(() => import("./components/Loading"));
 
-// Public pages
+// Public Pages
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
@@ -16,7 +17,7 @@ const ConfirmPassword = lazy(() => import("./pages/ConfirmPassword"));
 const PasswordResetSuccess = lazy(() => import("./pages/PasswordResetSuccess"));
 const OnboardingSteps = lazy(() => import("./pages/OnBoardingSteps"));
 
-// Dashboard
+// Dashboard Pages
 const DashboardLayout = lazy(() => import("./components/Layout/DashboardLayout"));
 const Overview = lazy(() => import("./pages/Dashboard/DashHome"));
 const Analytics = lazy(() => import("./pages/Dashboard/Analytics"));
@@ -26,9 +27,11 @@ const NotificationSettings = lazy(() => import("./pages/Dashboard/Settings/Notif
 const Verification = lazy(() => import("./pages/Dashboard/Settings/Verification"));
 const Support = lazy(() => import("./pages/Dashboard/Settings/Support"));
 const Payment = lazy(() => import("./pages/Dashboard/Payment"));
+const Successful = lazy(() => import("./pages/Dashboard/SplitzSuccessful"));
 const Wallet = lazy(() => import("./pages/Dashboard/Wallet"));
 const CreateSplitzPage = lazy(() => import("./pages/Dashboard/CreateSplitz"));
 const NotificationPage = lazy(() => import("./pages/Dashboard/Notification"));
+const Filter = lazy(() => import("./pages/Dashboard/Filter"));
 
 export default function App() {
   return (
@@ -45,13 +48,13 @@ export default function App() {
         <Route path="/identify" element={<Identify />} />
         <Route path="/onboarding-steps" element={<OnboardingSteps />} />
 
-        {/* Password Routes */}
+        {/* Password / Recovery */}
         <Route path="/forgot-password" element={<Forget />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/confirm-password" element={<ConfirmPassword />} />
         <Route path="/password-reset-success" element={<PasswordResetSuccess />} />
 
-        {/* Dashboard (Protected Later) */}
+        {/* Dashboard (Nested Layout) */}
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Overview />} />
           <Route path="analytics" element={<Analytics />} />
@@ -59,8 +62,10 @@ export default function App() {
           <Route path="wallet" element={<Wallet />} />
           <Route path="payment" element={<Payment />} />
           <Route path="notification" element={<NotificationPage />} />
+          <Route path="filter" element={<Filter />} />
+          <Route path="splitz-success" element={<Successful />} /> {/* fixed casing */}
 
-          {/* Settings */}
+          {/* Dashboard Settings Nested */}
           <Route path="settings" element={<SettingsLayout />}>
             <Route index element={<MyProfile />} />
             <Route path="profile" element={<MyProfile />} />

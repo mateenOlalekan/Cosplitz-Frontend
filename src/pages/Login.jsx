@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-white">
+    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white">
 
       {/* LEFT IMAGE PANEL (Hidden on mobile) */}
       <div className="hidden lg:block lg:w-1/2 h-screen">
@@ -82,7 +82,7 @@ export default function Login() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
         className="w-full lg:w-1/2 px-6 sm:px-10 md:px-16 py-8 
-                   flex flex-col justify-center items-center overflow-y-auto"
+                   flex flex-col justify-center items-center overflow-y-hidden"
       >
         {/* Logo */}
         <div className="w-full mb-8 flex justify-start">
@@ -197,9 +197,9 @@ export default function Login() {
               />
               <label className="text-sm text-gray-700">Remember me</label>
             </div>
-            <span className="text-green-600 text-sm cursor-pointer">
+            <Link to="forgot-password" className="text-green-600 text-sm cursor-pointer">
               Forgot Password?
-            </span>
+            </Link>
           </div>
 
           {/* Terms error */}

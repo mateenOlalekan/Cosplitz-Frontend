@@ -7,25 +7,25 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+/* body {
   font-family: 'Raleway', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #f9f9f9; /* Light, neutral background */
-  color: #222; /* Default text color */
+  background-color: #f9f9f9;
+  color: #222; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
+  -ms-overflow-style: none; 
+  scrollbar-width: none;     
+} */
 
 * {
   transition:
