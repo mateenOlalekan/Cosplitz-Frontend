@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 import AOS from "aos";
 import "aos/dist/aos.css";
 import image1 from "../assets/Frame 37.svg";
@@ -7,6 +8,10 @@ import image3 from "../assets/Frame 35.svg";
 import image4 from "../assets/Frame 34.svg";
 
 export default function WhoSection() {
+  const navigate = useNavigate();
+  const getOnboard=()=>{
+    navigate("/onboard")
+  }
   useEffect(() => {
     AOS.init({
       duration: 900,
@@ -79,7 +84,7 @@ export default function WhoSection() {
           </p>
           
 
-          <button className="bg-[#1F8225] text-white font-semibold text-sm md:text-base px-10 py-4 rounded-full shadow-md hover:bg-[#176b1d] transition-all duration-300">
+          <button onClick={getOnboard} className="bg-[#1F8225] text-white font-semibold text-sm md:text-base px-10 py-4 rounded-full shadow-md hover:bg-[#176b1d] transition-all duration-300">
             JOIN NOW
           </button>
         </div>
