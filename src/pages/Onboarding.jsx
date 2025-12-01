@@ -72,7 +72,7 @@ export default function Onboarding() {
           </button>
         ) : (
           <button
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/register")}
             className="text-green-700 font-semibold hover:underline transition m-2"
           >
             Sign Up
