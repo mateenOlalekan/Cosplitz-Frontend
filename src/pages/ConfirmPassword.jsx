@@ -43,7 +43,7 @@ export default function CreateNewPassword() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-white/40 overflow-hidden">
+    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white relative  xl:flex-row  w-full overflow-hidden  p-4 rounded-2xl">
       {/* === LEFT PANEL === */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}
@@ -108,7 +108,7 @@ export default function CreateNewPassword() {
           {/* === FORM === */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-full space-y-5 mt-2"
+            className="w-full space-y-4 mt-2"
             noValidate
           >
             {/* Password */}

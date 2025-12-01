@@ -19,7 +19,7 @@ export default function PasswordResetSuccess() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-[#F7F5F9] overflow-hidden md:px-6 md:py-4 rounded-2xl">
+    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white relative  xl:flex-row  w-full overflow-hidden  p-4 rounded-2xl">
       {/* === LEFT PANEL === */}
       <motion.div
         initial={{ opacity: 0, x: -60 }}

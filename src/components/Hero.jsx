@@ -2,10 +2,9 @@ import { useEffect} from "react";
 import AOS from "aos";
 import Hero from "../assets/object.svg";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router-dom";
 
 export default function WaveBackground() {
-
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -22,6 +21,12 @@ export default function WaveBackground() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navigate = useNavigate()
+
+  const getStarted=()=>{
+    navigate('/onboard')
+  }
+
   return (
     <>
 
@@ -37,7 +42,7 @@ export default function WaveBackground() {
               className="w-full md:w-1/2 space-y-3 md:space-y-4 flex flex-col justify-center"
               data-aos="fade-right"
             >
-              <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl  font-bold text-gray-900 leading-tight tracking-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl  font-bold text-gray-900 leading-tight tracking-tight">
                 Split Smarter,
                 <br/>
                 Spend Together
@@ -53,7 +58,7 @@ export default function WaveBackground() {
                 data-aos="zoom-in"
                 data-aos-delay="300"
               >
-                <button className="px-6 sm:px-8 py-3 md:py-4 bg-[#1F8225] text-white font-semibold rounded-md shadow-md hover:bg-[#17661C] active:scale-95 transition duration-300 w-full sm:w-auto">
+                <button onClick={getStarted} className="px-6 sm:px-8 py-3 md:py-4 bg-[#1F8225] text-white font-semibold rounded-md shadow-md hover:bg-[#17661C] active:scale-95 transition duration-300 w-full sm:w-auto">
                   Get Started
                 </button>
                 <button className="px-6 sm:px-8 py-3 md:py-4 border-2 border-[#1F8225] text-[#1F8225] font-semibold rounded-md hover:bg-[#f0f9f0] active:scale-95 transition duration-300 w-full sm:w-auto">

@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white">
+    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white relative  xl:flex-row  w-full overflow-hidden  p-4 rounded-2xl">
 
       {/* LEFT IMAGE PANEL (Hidden on mobile) */}
       <div className="hidden lg:block lg:w-1/2 h-screen">

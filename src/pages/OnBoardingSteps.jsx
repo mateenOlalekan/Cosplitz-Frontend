@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronLeft, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 import {
   UtensilsCrossed,
   Users,
@@ -20,7 +21,8 @@ import {
   FileInput,
   Package,
   Headphones,
-  Hotel,  Truck,
+  Hotel,
+  Truck,
 } from "lucide-react";
 
 const steps = [
@@ -31,7 +33,7 @@ const steps = [
     type: "multiple",
     options: [
       { id: "groceries", label: "Groceries", icon: UtensilsCrossed },
-      { id: "rosca", label: "ROSCA (a.k.a. Esusu)", icon: Briefcase },
+      { id: "rosca", label: "ROSCA (Esusu)", icon: Briefcase },
       { id: "car", label: "Car/Transport", icon: Truck },
       { id: "accommodation", label: "Accommodation", icon: Hotel },
       { id: "study", label: "Study Materials", icon: BookOpen },
@@ -40,25 +42,24 @@ const steps = [
       { id: "subscriptions", label: "Subscriptions", icon: Headphones },
     ],
     input: "Other Interests",
-    placeholder: "e.g. Pet supplies, Gym memberships, Tickets",
+    placeholder: "e.g. Pet supplies, Gym memberships",
   },
   {
     title: "What is your current situation?",
-    description:
-      "This helps us match you with the most relevant hyperlocal opportunities.",
+    description: "This helps us match you with relevant hyperlocal opportunities.",
     type: "single",
     options: [
       { id: "student", label: "Student", icon: BookOpen },
       { id: "immigrant", label: "New Immigrant", icon: Globe },
       { id: "traveler", label: "Traveler/Nomad", icon: Plane },
       { id: "professional", label: "Working Professional", icon: Briefcase },
-      { id: "micro", label: "Micro Businesses", icon: Lightbulb },
-      { id: "handymen", label: "Handymen", icon: Wrench },
-      { id: "events", label: "Event Planners", icon: Zap },
-      { id: "religious", label: "Religious Groups", icon: Users },
+      { id: "micro", label: "Micro Business", icon: Lightbulb },
+      { id: "handymen", label: "Handyman", icon: Wrench },
+      { id: "events", label: "Event Planner", icon: Zap },
+      { id: "religious", label: "Religious Group", icon: Users },
     ],
     input: "Other (if none apply):",
-    placeholder: "e.g. Retiree, Parent, Freelancer",
+    placeholder: "e.g. Freelancer, Retiree",
   },
   {
     title: "What is most important to you when splitting costs?",
@@ -68,20 +69,19 @@ const steps = [
     options: [
       { id: "saving", label: "Saving Money", icon: DollarSign },
       { id: "convenience", label: "Convenience", icon: Clock },
-      { id: "trust", label: "Trust / Reliability", icon: CheckCircle },
+      { id: "trust", label: "Trust / Reliability", icon: Check },
       { id: "location", label: "Nearby Location", icon: MapPin },
       { id: "flexibility", label: "Flexibility", icon: Zap },
-      { id: "security", label: "Security / Protection", icon: Lock },
+      { id: "security", label: "Security", icon: Lock },
       { id: "transparency", label: "Transparency", icon: Eye },
-      { id: "selection", label: "Flexible Selection", icon: Check },
+      { id: "selection", label: "Flexible Selection", icon: TrendingUp },
     ],
     input: "Other (if none apply):",
-    placeholder: "e.g. Effortless onboarding, Fairness, Speed",
+    placeholder: "e.g. Speed, Fairness",
   },
   {
     title: "What is your top goal for using Co-splitz?",
-    description:
-      "We'll customize your dashboard based on this primary motivation.",
+    description: "We'll customize your dashboard based on this motivation.",
     type: "single",
     options: [
       { id: "save", label: "Save Money", icon: DollarSign },
@@ -90,79 +90,22 @@ const steps = [
       { id: "share", label: "Share Resources", icon: Zap },
       { id: "crowdfunding", label: "Crowdfunding", icon: Lightbulb },
       { id: "time", label: "Time Saving", icon: Clock },
-      { id: "accuracy", label: "Financial Accuracy", icon: TrendingUp },
     ],
     input: "Other (if none apply):",
-    placeholder: "e.g. Fairness, Speed, Collaboration",
+    placeholder: "e.g. Collaboration",
   },
 ];
 
 const IconComponent = ({ IconType }) => (
-  <IconType className="w-8 h-8 text-green-600" />
+  <IconType className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
 );
 
-const Dashboard = ({ userResponses }) => {
-  return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-green-50 to-white">
-      <div className="flex-1 flex items-center justify-center px-4">
-        <div className="max-w-2xl w-full text-center">
-          <div className="mb-6">
-            <CheckCircle className="w-24 h-24 text-green-600 mx-auto mb-6" />
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            🎉 Welcome to Co-splitz!
-          </h1>
-          <p className="text-lg text-gray-600 mb-8">
-            Your profile has been set up successfully. Let's start finding great splits!
-          </p>
-
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8 text-left">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Your Profile Summary</h2>
-            <div className="space-y-4">
-              <div className="border-b pb-3">
-                <p className="text-sm text-gray-600">Interests:</p>
-                <p className="font-medium text-gray-900">
-                  {userResponses[0].selected.join(", ") || "Custom interests"}
-                </p>
-              </div>
-              <div className="border-b pb-3">
-                <p className="text-sm text-gray-600">Current Situation:</p>
-                <p className="font-medium text-gray-900">
-                  {steps[1].options.find(o => o.id === userResponses[1].selected[0])?.label || "Other"}
-                </p>
-              </div>
-              <div className="border-b pb-3">
-                <p className="text-sm text-gray-600">Top Priorities:</p>
-                <p className="font-medium text-gray-900">
-                  {userResponses[2].selected.map(id => 
-                    steps[2].options.find(o => o.id === id)?.label
-                  ).join(", ")}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">Primary Goal:</p>
-                <p className="font-medium text-gray-900">
-                  {steps[3].options.find(o => o.id === userResponses[3].selected[0])?.label || "Other"}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <button
-            onClick={() => window.location.href = "#/dashboard"}
-            className="bg-green-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-green-700 transition"
-          >
-            Go to Dashboard
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export default function CoSplitzOnboarding() {
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selections, setSelections] = useState(
     steps.map(() => ({ selected: [], other: "" }))
   );
@@ -172,24 +115,22 @@ export default function CoSplitzOnboarding() {
 
   const toggleSelection = (id) => {
     const newSelections = [...selections];
-    let stepSelections = [...selected];
+    let newSelected = [...selected];
 
     if (step.type === "single") {
-      stepSelections = [id];
-    } else if (step.type === "multiple-limited" && step.limit) {
-      const idx = stepSelections.indexOf(id);
-      if (idx > -1) stepSelections.splice(idx, 1);
-      else if (stepSelections.length < step.limit) stepSelections.push(id);
+      newSelected = [id];
+    } else if (step.type === "multiple-limited") {
+      if (newSelected.includes(id))
+        newSelected = newSelected.filter((s) => s !== id);
+      else if (newSelected.length < step.limit)
+        newSelected.push(id);
     } else {
-      const idx = stepSelections.indexOf(id);
-      if (idx > -1) stepSelections.splice(idx, 1);
-      else stepSelections.push(id);
+      if (newSelected.includes(id))
+        newSelected = newSelected.filter((s) => s !== id);
+      else newSelected.push(id);
     }
 
-    newSelections[currentStep] = {
-      ...newSelections[currentStep],
-      selected: stepSelections,
-    };
+    newSelections[currentStep].selected = newSelected;
     setSelections(newSelections);
   };
 
@@ -206,46 +147,58 @@ export default function CoSplitzOnboarding() {
   };
 
   const handleContinue = () => {
-    if (isStepComplete()) {
-      if (currentStep < steps.length - 1) {
-        setCurrentStep((prev) => prev + 1);
-      } else {
-        setIsComplete(true);
-      }
+    if (!isStepComplete()) return;
+
+    if (currentStep < steps.length - 1) {
+      setCurrentStep((s) => s + 1);
+    } else {
+      // COMPLETE → SHOW LOADING → NAVIGATE
+      setIsLoading(true);
+      setTimeout(() => navigate("/dashboard"), 1500);
     }
   };
 
   const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep((prev) => prev - 1);
-    }
+    if (currentStep > 0) setCurrentStep((s) => s - 1);
   };
 
   const progress = ((currentStep + 1) / steps.length) * 100;
 
-  if (isComplete) {
-    return <Dashboard userResponses={selections} />;
+  // =======================
+  //   LOADING SCREEN
+  // =======================
+  if (isLoading) {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center bg-white">
+        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent animate-spin rounded-full"></div>
+        <p className="mt-4 text-green-700 font-medium text-sm">
+          Setting up your dashboard...
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="h-screen flex flex-col bg-white text-gray-900">
       <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4">
-        <div className="max-w-2xl mx-auto flex flex-col h-full">
-          {/* === Header === */}
-          <div className="mb-3">
+        <div className="max-w-xl mx-auto flex flex-col h-full">
+
+          {/* Header */}
+          <div className="mb-4">
             {currentStep > 0 && (
               <button
                 onClick={handleBack}
-                className="text-green-600 font-medium mb-3 flex items-center hover:text-green-700 transition"
+                className="text-green-600 mb-2 flex items-center text-sm hover:text-green-700"
               >
-                <ChevronLeft className="w-5 h-5 mr-1" />
+                <ChevronLeft className="w-4 h-4 mr-1" />
                 Back
               </button>
             )}
 
-            <p className="text-green-600 font-medium text-sm mb-2">
+            <p className="text-green-600 text-xs font-medium mb-1">
               Step {currentStep + 1} of {steps.length}
             </p>
+
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
                 className="bg-green-600 h-2 rounded-full transition-all duration-300"
@@ -254,68 +207,71 @@ export default function CoSplitzOnboarding() {
             </div>
           </div>
 
-          {/* === Step Content === */}
-          <div className="flex-1 flex flex-col justify-between">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold mb-2">{step.title}</h1>
-              <p className="text-gray-500 text-sm sm:text-base mb-3">
-                {step.description}
-              </p>
+          {/* Content */}
+          <div className="flex-1">
+            <h1 className="text-lg sm:text-xl font-bold mb-1">{step.title}</h1>
+            <p className="text-gray-500 text-xs sm:text-sm mb-3">
+              {step.description}
+            </p>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-4">
-                {step.options.map((option) => {
-                  const isSelected = selected.includes(option.id);
-                  return (
-                    <button
-                      key={option.id}
-                      onClick={() => toggleSelection(option.id)}
-                      className={`p-3 sm:p-4 rounded-lg border-2 flex flex-col items-center justify-center transition-all duration-200 ${
-                        isSelected
-                          ? "border-green-600 bg-green-50"
-                          : "border-gray-200 bg-white hover:border-gray-300"
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-4">
+              {step.options.map((option) => {
+                const isSelected = selected.includes(option.id);
+                return (
+                  <button
+                    key={option.id}
+                    onClick={() => toggleSelection(option.id)}
+                    className={`p-3 rounded-lg border flex flex-col items-center transition ${
+                      isSelected
+                        ? "border-green-600 bg-green-50"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <IconComponent IconType={option.icon} />
+                    <span
+                      className={`mt-1 text-xs sm:text-sm font-medium ${
+                        isSelected ? "text-green-600" : "text-gray-700"
                       }`}
                     >
-                      <IconComponent IconType={option.icon} />
-                      <span
-                        className={`mt-1 text-xs sm:text-sm font-medium ${
-                          isSelected ? "text-green-600" : "text-gray-700"
-                        }`}
-                      >
-                        {option.label}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                      {option.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-              {/* Other input */}
-              <div className="flex flex-col mb-1">
-                <label className="text-sm text-gray-700 mb-1">{step.input}</label>
-                <input
-                  type="text"
-                  value={other}
-                  onChange={handleOtherChange}
-                  placeholder={step.placeholder}
-                  className="w-full text-sm sm:text-base indent-2 py-2 rounded-lg border-2 outline-none border-green-500"
-                />
-              </div>
+            {/* Input */}
+            <div className="mb-2">
+              <label className="text-xs sm:text-sm text-gray-700 mb-1 block">
+                {step.input}
+              </label>
+
+              <input
+                type="text"
+                value={other}
+                onChange={handleOtherChange}
+                placeholder={step.placeholder}
+                className="w-full text-xs sm:text-sm px-3 py-2 rounded-lg border border-green-400 outline-none"
+              />
             </div>
           </div>
 
-          {/* === Continue Button === */}
-          <div className="sticky bottom-0 mt-auto bg-white pt-1">
+          {/* Continue Button */}
+          <div className="sticky bottom-0 bg-white pt-1">
             <button
               onClick={handleContinue}
               disabled={!isStepComplete()}
-              className={`w-full py-3 rounded-lg font-medium text-sm sm:text-base transition-all duration-200 ${
+              className={`w-full py-3 rounded-lg font-medium text-sm transition ${
                 isStepComplete()
                   ? "bg-green-600 text-white hover:bg-green-700"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gray-300 text-gray-500"
               }`}
             >
               {currentStep === steps.length - 1
                 ? "Complete Setup"
-                : `Continue${selected.length > 0 ? ` (${selected.length})` : ""}`}
+                : `Continue${
+                    selected.length > 0 ? ` (${selected.length})` : ""
+                  }`}
             </button>
           </div>
         </div>

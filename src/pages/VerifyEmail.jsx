@@ -61,7 +61,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-white overflow-hidden">
+    <div className="h-screen flex flex-col px-8 py-4 lg:flex-row bg-white relative  xl:flex-row  w-full overflow-hidden  p-4 rounded-2xl">
 
       {/* === LEFT SIDE === */}
       <div className="hidden lg:flex lg:w-1/2 relative items-center justify-center bg-gray-50">

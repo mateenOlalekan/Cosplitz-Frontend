@@ -379,7 +379,7 @@ export default function Login() {
 
               <button
                 className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/onboarding-steps")}
               >
                 Continue to Login
               </button>
