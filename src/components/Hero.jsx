@@ -34,8 +34,8 @@ export default function WaveBackground() {
         id="home"
         className="relative w-full  pt-24 md:pt-24 bg-white overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4  h-full">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 lg:gap-10 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
+        <div className="max-w-7xl mx-auto flex  px-4  h-full">
+          <div className="w-full flex max-md:flex-col  items-center justify-between gap-2 md:gap-8 lg:gap-10 min-h-[calc(100vh-200px)] md:min-h-[calc(100vh-160px)]">
 
             {/* ====== Left Content ====== */}
             <div
@@ -73,7 +73,7 @@ export default function WaveBackground() {
               data-aos="fade-left"
               data-aos-delay="200"
             >
-              <div className="relative w-full max-w-sm pt sm:max-w-sm md:max-w-lg lg:max-w-2xl">
+              <div className="relative w-full max-w-sm pt sm:max-w-sm md:max-w-lg lg:max-w-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1F8225]/10 to-transparent rounded-2xl blur-2xl -z-10" />
                 <img
                   src={Hero}
@@ -87,7 +87,7 @@ export default function WaveBackground() {
 
               {/* ====== Buttons ====== */}
               <div
-                className="hidden max-md:flex  sm:flex-row gap-4 py-10 md:pt-6 w-full sm:w-auto"
+                className="hidden max-md:flex  max-md:flex-col gap-4 pt-8 w-full sm:w-auto"
                 data-aos="fade-up"
                 data-aos-delay="200"
               >

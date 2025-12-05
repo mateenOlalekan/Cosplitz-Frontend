@@ -24,6 +24,7 @@ import {
   Hotel,
   Truck,
 } from "lucide-react";
+import Loading from "../components/Loading";
 
 const steps = [
   {
@@ -169,12 +170,9 @@ export default function CoSplitzOnboarding() {
   // =======================
   if (isLoading) {
     return (
-      <div className="h-screen flex flex-col justify-center items-center bg-white">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent animate-spin rounded-full"></div>
-        <p className="mt-4 text-green-700 font-medium text-sm">
-          Setting up your dashboard...
-        </p>
-      </div>
+     <>
+     <Loading/>
+     </>
     );
   }
 
